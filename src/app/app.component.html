@@ -1,0 +1,6 @@
+<nav style="text-align: right;">
+  <span *ngIf="!userLoginService.userInfo.isLogin">login</span>
+  <span *ngIf="userLoginService.userInfo.isLogin">欢迎您{{userLoginService.userInfo.name}}</span>
+  <span (click)="logout()" *ngIf="userLoginService.userInfo.isLogin" style="display: inline-block;background: #ffaaaa;padding: 5px;color: #fff;border-radius: 5px;cursor: pointer;">loginOut</span>
+</nav>
+<router-outlet></router-outlet>

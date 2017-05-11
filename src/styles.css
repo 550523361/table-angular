@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+.onHover:hover{
+  background: #fff;
+  color: #f00;
+}
+
+::-webkit-scrollbar
+{
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track-piece
+{
+  background-color: #CCCCCC;
+  -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+  height: 5px;
+  background-color: rgba(0,0,0,0.5);
+  -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+  width: 5px;
+  background-color: #CCCCCC;
+  -webkit-border-radius: 6px;
+}
+.base-model{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: #f0f;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}

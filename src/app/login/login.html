@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+<form action="">
+  <input type="text" [(ngModel)]="email" name="emain" placeholder="用户名">
+  <input type="password" [(ngModel)]="passwd" name="passwd" placeholder="密码">
+
+  {{userLoginService|json}}
+
+  <input (click)="login()" type="button" value="登陆">
+</form>
+</body>
+</html>
