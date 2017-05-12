@@ -128,7 +128,6 @@ export class BaseValidateService extends BaseDataService{
         let propName=param["prop"];
         let formModel=param["formModel"];
         let formGroup=param["formGroup"];
-        console.log("checkboxWatchers",propName)
         if(formGroup){
           let queryParam={};
           let grandfather=param["grandfather"];
@@ -174,13 +173,22 @@ export class BaseValidateService extends BaseDataService{
           if(!formGroup){
             continue;
           }
+          let formValues={};
+          formGroup.value[grandfather].forEach(item=>{
+            formValues[item.prop]=item.value;
+          });
           let grandfatherControl=formGroup.get(grandfather);
           formModel.elements.forEach(element=>{
             if(element.type=="array"&&element.keyPropMap){
               element.options.forEach(option=>{
                 if(option.switchers&&option.switchers.length>0&&option.switchers[0].prop==propName){
                   if(option.remoteInfo!=null){
-                    option.remoteInfo.param.pid=value;
+                    option.remoteInfo.param[option.remoteInfo.param["extend"]]=value;
+                    if(option.remoteInfo.propMap){
+                      for(let propKey in option.remoteInfo.propMap){
+                        option.remoteInfo.param[option.remoteInfo.propMap[propKey]]=propKey==propName?value:formValues[propKey];
+                      }
+                    }
                     if(value==""||value==null){
                       option["options"]=option.remoteInfo.convert({});
                     }else{

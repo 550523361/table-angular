@@ -1,3 +1,36 @@
 .searchBtn{
   display: inline-block;padding: 3px 10px;background: #fff;border: 1px solid #e00;color: #e00;border-radius: 3px;font-size: 12px;cursor: pointer;
 }
+.communityList{
+  border: 1px solid #aaa;
+  width: 65%;
+  margin: 3px 0px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 160px;
+}
+.arrayListContainer{
+  max-height: 300px;
+  overflow-y: auto;
+}
+.lineChecked{
+  background:rgba(0, 188, 212, 0.18);
+  cursor: pointer;
+}
+
+.checkFlag{
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background: url(https://testbackend.goodaa.com.cn/ejiazi-backend/images/checked.png) center center no-repeat;
+  background-size: contain;
+}
+.unCheckFlag{
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background: url(https://testbackend.goodaa.com.cn/ejiazi-backend/images/unchecked.png) center center no-repeat;
+  background-size: contain;
+}

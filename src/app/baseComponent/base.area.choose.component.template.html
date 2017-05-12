@@ -5,15 +5,6 @@
     <title>区域选择控件</title>
 </head>
 <body>
-    <span class="leftInnerGroupContainer" *ngFor="let city of chooseArray">
-        <span class="itemBlock">{{city.name}} <span class="itemRemoveIcon">×</span></span>
-    </span>
-    <hr>
-    <div>
-        <span class="leftInnerGroupContainer" *ngFor="let area of chooseAreaArray">
-            <span class="itemBlock">{{area.provinceId}}_{{area.cityId}}_{{area.districtId}}_{{area.rings}} <span class="itemRemoveIcon">×</span></span>
-        </span>
-    </div>
 <form novalidate [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
   <div *ngFor="let element of formModel.elements;let i = index;" [ngSwitch]="element.type" class="formRow">
             <span  *ngSwitchCase="'input'">
@@ -97,22 +88,6 @@
                                           <span *ngIf="!element.hidden">
                                             <label class="searchBtn" (click)="optionFormControl.value.click(formGroup.value)">{{optionFormControl.value.label}}</label>
                                           </span>
-                                          <div class="arrayListContainer">
-                                              <div *ngFor="let community of queryResultCommunityList;let index=index;" class="communityList" (click)="chooseCommunity(community)" [ngClass]="{lineChecked:community.checked}">
-                                                <span style="display: inline-block;padding: 3px 10px;background: #ddd;color: #fff;width: 30px;">
-                                                  {{index+1}}
-                                                </span>
-                                                <span style="display: inline-block;padding: 3px 10px;color: #000;">
-                                                  {{community.name}}
-                                                </span>
-                                                <span [ngClass]="{checkFlag:community.checked,unCheckFlag:!community.checked}"></span>
-                                              </div>
-                                          </div>
-                                      </span>
-                                      <span  *ngSwitchCase="'button'">
-                                          <span *ngIf="!element.hidden">
-                                            <label class="searchBtn" (click)="optionFormControl.value.click(formGroup.value[element.prop])">{{optionFormControl.value.label}}</label>
-                                          </span>
                                       </span>
                                       <span  *ngSwitchCase="'date'">
                                           <span *ngIf="!element.hidden">
@@ -158,6 +133,15 @@
                   <span class="ng-invalid-msg"  *ngFor="let key of formGroup.get(element.prop+'LinkValidate').errors|keys ">{{formGroup.get(element.prop+'LinkValidate').errors[key]}}</span>
                 </span>
             </span>
+  </div>
+  <div *ngFor="let community of queryResultCommunityList;let index=index;" class="communityList" (click)="chooseCommunity(community)" [ngClass]="{lineChecked:community.checked}">
+    <span style="display: inline-block;padding: 3px 10px;background: #ddd;color: #fff;width: 30px;">
+      {{index+1}}
+    </span>
+    <span style="display: inline-block;padding: 3px 10px;color: #000;">
+      {{community.name}}
+    </span>
+    <span [ngClass]="{checkFlag:community.checked,unCheckFlag:!community.checked}"></span>
   </div>
   <div class="submitBtnContainer">
     <input type="submit" value="提交" class="submitBtn" [disabled]="formGroup.status=='INVALID'" >
