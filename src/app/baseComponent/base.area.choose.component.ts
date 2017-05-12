@@ -553,7 +553,10 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
   }
   chooseArray=[];
   chooseCommunity(community){
-    let result=this.findCommunity(community.id);
+    let result=this.findCommunity(community.id,community);
+    if(result==0){
+      return;
+    }
     if(!community["checked"]||community["checked"]==false){
       if(!result){
         community["checked"]=true;
@@ -565,7 +568,10 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     }
   }
 
-  findCommunity(findId){
+  findCommunity(findId,community){
+    if(!this.isCommunityInChooseArea(community)){
+      return 0;
+    }
     let findCommunity=this.chooseArray.filter(community=>{
       if(community.id==findId){
         return community;
@@ -578,6 +584,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     let index=-1;
     let findIndex=this.chooseArray.forEach((community,seq)=>{
       if(community.id==removeId){
+        community.checked=false;
         index=seq;
       }
     });
@@ -598,54 +605,99 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     let result;
     this.chooseAreaArray.forEach(arrayArea=>{
       if(arrayArea.provinceId==area.provinceId){
-        if(arrayArea.cityId==""){
+        if(arrayArea.cityId==""&&arrayArea.cityId==""&&arrayArea.districtId==""&&arrayArea.rings==""){
           result=arrayArea;/*被省覆盖 不添加当前区域*/
           return;
         }
-        if(arrayArea.cityId==area.cityId){
-          if(arrayArea.districtId==""&&arrayArea.rings==""){
+        if(arrayArea.cityId!=""&&arrayArea.cityId==area.cityId&&arrayArea.districtId==""&&arrayArea.rings==""){
             result=arrayArea;/*被城市覆盖 不添加当前区域*/
             return;
-          }
         }
-        if(arrayArea.districtId==area.districtId){
-          if(arrayArea.rings==""){
+        if(arrayArea.districtId!=""&&arrayArea.cityId==area.cityId&&arrayArea.districtId==area.districtId&&arrayArea.rings==""){
             result=arrayArea;/*被城区覆盖 不添加当前区域*/
             return;
-          }else if(arrayArea.rings>=area.rings){
-            result=arrayArea;/*被城大环覆盖 不添加当前区域*/
+        }
+        if(arrayArea.districtId!=""&&arrayArea.cityId==area.cityId&&arrayArea.districtId==area.districtId&&area.rings!=""&&arrayArea.rings!=""&&arrayArea.rings>=area.rings){
+            result=arrayArea;/*被有区环覆盖 不添加当前区域*/
             return;
-          }
+        }
+        if(arrayArea.districtId==""&&area.districtId==""&&arrayArea.cityId==area.cityId&&area.rings!=""&&arrayArea.rings!=""&&arrayArea.rings>=area.rings){
+            result=arrayArea;/*被无区环覆盖 不添加当前区域*/
+            return;
+        }
+        if(arrayArea.districtId==""&&area.districtId!=""&&area.rings!=""&&arrayArea.cityId==area.cityId&&area.rings!=""&&arrayArea.rings!=""&&arrayArea.rings>=area.rings){
+            result=arrayArea;/*被无区环覆盖 不添加当前区域*/
+            return;
         }
       }
     });
     console.log(result,area);
 
     let areaDeleteArr=[];
-    /*查找被覆盖的区域*/
+    /*查找被新区域覆盖的已选择的区域*/
     this.chooseAreaArray.forEach(arrayArea=>{
+      if(arrayArea.provinceId==area.provinceId&&arrayArea.cityId==area.cityId&&
+          arrayArea.districtId==area.districtId&&arrayArea.rings==area.rings){
+        //不要排除自己啊
+        return;
+      }
       if(arrayArea.provinceId==area.provinceId){
-        if(area.cityId==""){
+        if(arrayArea.cityId!=""&&area.cityId==""&&area.districtId==""&&area.rings==""){
             areaDeleteArr.push(arrayArea);/*省覆盖省下面任何区域*/
             return;
         }
-        if(arrayArea.cityId==area.cityId){
-          if(area.districtId==""&&area.rings==""){
-            areaDeleteArr.push(arrayArea);/*城市覆盖下面任何区域*/
-          }else if(area.districtId==""&&area.rings!=""&&area.rings>arrayArea.rings){
-            areaDeleteArr.push(arrayArea);/*没区环 覆盖环*/
-          }else if(area.districtId==arrayArea.districtId){
-            if(area.rings==""){
-              areaDeleteArr.push(arrayArea);/*区 覆盖区下所有*/
-            }else if(area.rings>arrayArea.rings){
-              areaDeleteArr.push(arrayArea);/*大环 覆盖小环*/
-            }
-          }
+        if(arrayArea.cityId==area.cityId&&area.cityId!=""&&area.districtId==""&&area.rings==""&&(arrayArea.districtId!=""||arrayArea.rings!="")){
+            areaDeleteArr.push(arrayArea);/*城市覆盖其下面任何区域*/
+            return;
+        }
+        if(arrayArea.districtId==area.districtId&&arrayArea.cityId==area.cityId&&area.cityId!=""&&area.districtId!=""&&area.rings==""&&arrayArea.rings!=""){
+            areaDeleteArr.push(arrayArea);/*区覆盖其下面任何区域*/
+            return;
+        }
+        if(area.districtId==""&&arrayArea.cityId==area.cityId&&area.cityId!=""&&area.rings>arrayArea.rings){
+            areaDeleteArr.push(arrayArea);/*无区环覆盖其下面任何区域*/
+            return;
+        }
+        if(arrayArea.districtId==area.districtId&&area.districtId!=""&&arrayArea.cityId==area.cityId&&area.cityId!=""&&arrayArea.rings!=""&&area.rings>arrayArea.rings){
+            areaDeleteArr.push(arrayArea);/*有区环覆盖其下面任何区域*/
+            return;
+        }
+        if(arrayArea.districtId==""&&area.districtId==""&&arrayArea.cityId==area.cityId&&area.cityId!=""&&arrayArea.rings!=""&&area.rings!=""&&area.rings>arrayArea.rings){
+            areaDeleteArr.push(arrayArea);/*无区 对无区 环覆盖其下面任何区域*/
+            return;
+        }
+        if(arrayArea.districtId!=""&&area.districtId==""&&arrayArea.cityId==area.cityId&&area.cityId!=""&&arrayArea.rings!=""&&area.rings!=""&&area.rings>=arrayArea.rings){
+            areaDeleteArr.push(arrayArea);/*无区 对有区 环覆盖其下面任何区域*/
+            return;
+        }
+        if(arrayArea.districtId==""&&area.districtId!=""&&arrayArea.cityId==area.cityId&&area.cityId!=""&&area.rings>arrayArea.rings){
+            //areaDeleteArr.push(arrayArea);/*有区 对无区 环覆盖其下面任何区域*/
+            return;
         }
       }
     });
     console.log("delete array",areaDeleteArr);
     this.removeArea(areaDeleteArr);
+
+    //3.查找和删除小区
+    let findDeleteCommunity=this.chooseArray.filter(community=>{
+      if(area.provinceId==community.provinceId&&area.cityId==""){
+        return community;//省
+      }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings==""){
+        return community;//城市
+      }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==community.districtId&&area.rings==""){
+        return community;//区
+      }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings>=community.rings){
+        return community;//无区环
+      }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==community.districtId&&area.rings>=community.rings){
+        return community;//有区环
+      }
+    });
+
+    console.log("findDeleteCommunity",findDeleteCommunity)
+
+    this.removeCommunities(findDeleteCommunity);
+
     return result;
   }
 
@@ -674,4 +726,41 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     })
   }
 
+  /**
+   * 批量删除小区
+   * @param deleteArray
+   */
+  removeCommunities(deleteArray){
+    deleteArray.forEach(deleteCommunity=>{
+      let index=-1;
+      let findIndex=this.chooseArray.forEach((community,seq)=>{
+        if(community.id==deleteCommunity.id){
+          community.checked=false;
+          index=seq;
+        }
+      });
+      this.chooseArray.splice(index,1);
+    })
+  }
+
+  /**
+   * 查找小区是否被已选择区域覆盖
+   * @param community
+   */
+  isCommunityInChooseArea(community){
+    let checkResult=this.chooseAreaArray.filter(area=>{
+        if(area.provinceId==community.provinceId&&area.cityId==""){
+          return community;//省
+        }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings==""){
+          return community;//城市
+        }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==community.districtId&&area.rings==""){
+          return community;//区
+        }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings>=community.rings){
+          return community;//无区环
+        }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==community.districtId&&area.rings>=community.rings){
+          return community;//有区环
+        }
+    })
+    return checkResult.length==0;
+  }
 }

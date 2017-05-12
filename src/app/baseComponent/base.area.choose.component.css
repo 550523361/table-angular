@@ -34,3 +34,14 @@
   background: url(https://testbackend.goodaa.com.cn/ejiazi-backend/images/unchecked.png) center center no-repeat;
   background-size: contain;
 }
+
+.itemRemoveIcon{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background: #f33;
+  color: #fff;
+  border-radius: 50%;
+}

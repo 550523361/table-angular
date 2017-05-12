@@ -5,13 +5,13 @@
     <title>区域选择控件</title>
 </head>
 <body>
-    <span class="leftInnerGroupContainer" *ngFor="let city of chooseArray">
-        <span class="itemBlock">{{city.name}} <span class="itemRemoveIcon">×</span></span>
+    <span class="leftInnerGroupContainer" *ngFor="let community of chooseArray">
+        <span class="itemBlock">{{community.name}} <span class="itemRemoveIcon" (click)="removeCommunity(community.id)">×</span></span>
     </span>
     <hr>
     <div>
         <span class="leftInnerGroupContainer" *ngFor="let area of chooseAreaArray">
-            <span class="itemBlock">{{area.provinceId}}_{{area.cityId}}_{{area.districtId}}_{{area.rings}} <span class="itemRemoveIcon">×</span></span>
+            <span class="itemBlock">{{area.provinceId}}_{{area.cityId}}_{{area.districtId}}_{{area.rings}} <span class="itemRemoveIcon"  (click)="removeArea([area])">×</span></span>
         </span>
     </div>
 <form novalidate [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
