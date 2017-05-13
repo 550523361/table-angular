@@ -179,7 +179,7 @@ export class BaseValidateService extends BaseDataService{
           });
           let grandfatherControl=formGroup.get(grandfather);
           formModel.elements.forEach(element=>{
-            if(element.type=="array"&&element.keyPropMap){
+            if(element.type=="array"&&element.keyPropMap&&grandfather==element.prop){
               element.options.forEach(option=>{
                 if(option.switchers&&option.switchers.length>0&&option.switchers[0].prop==propName){
                   if(option.remoteInfo!=null){
@@ -192,6 +192,7 @@ export class BaseValidateService extends BaseDataService{
                     if(value==""||value==null){
                       option["options"]=option.remoteInfo.convert({});
                     }else{
+                      console.log("element",element.prop)
                       this.listData({url:option.remoteInfo.url,param:option.remoteInfo.param,httpMethod:option.remoteInfo.httpMethod}).subscribe(data=>{
                         option["options"]=option.remoteInfo.convert(data.json())||data.json();
                       });

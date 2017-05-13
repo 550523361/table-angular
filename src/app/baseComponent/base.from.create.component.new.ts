@@ -93,12 +93,12 @@ export class BaseFormCreateComponentNew{
         item["keyPropMap"]=keyPropMap;
         const addressFormArray = this.formBuilder.array(addressFGs);
         formGroupModel[item.prop]=addressFormArray;
-        if(item.type=="array"){
-          /*formGroupModel[item.prop+"LinkValidate"]=[item.defaultValue,[control=>{
+        if(item.type=="array"&&!item.noNeedValidateElement==true){
+          formGroupModel[item.prop+"LinkValidate"]=[item.defaultValue,[control=>{
             if(control.value!=""){
               return {"required":control.value}
             }
-          }]];*/
+          }]];
         }
       }else if(item.type=="select"){
         if(item.remoteInfo!=null){

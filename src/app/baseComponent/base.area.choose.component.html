@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <title>区域选择控件</title>
 </head>
-<body>
-    <span class="leftInnerGroupContainer" *ngFor="let community of chooseArray">
-        <span class="itemBlock">{{community.name}} <span class="itemRemoveIcon" (click)="removeCommunity(community.id)">×</span></span>
-    </span>
-    <hr>
-    <div>
+<body style="padding: 0px;margin: 0px;">
+    <div class="communityChooseContainer" *ngIf="chooseArray.length>0">
+      <span class="leftInnerGroupContainer" *ngFor="let community of chooseArray">
+          <span class="itemBlock">{{community.name}} <span class="itemRemoveIcon" (click)="removeCommunity(community.id)">×</span></span>
+      </span>
+    </div>
+    <div *ngIf="chooseAreaArray.length>0" class="areaChooseContainer">
         <span class="leftInnerGroupContainer" *ngFor="let area of chooseAreaArray">
-            <span class="itemBlock">{{area.provinceId}}_{{area.cityId}}_{{area.districtId}}_{{area.rings}} <span class="itemRemoveIcon"  (click)="removeArea([area])">×</span></span>
+            <span class="itemBlock">{{area.name}}<span class="itemRemoveIcon"  (click)="removeArea([area])">×</span></span>
         </span>
     </div>
 <form novalidate [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
-  <div *ngFor="let element of formModel.elements;let i = index;" [ngSwitch]="element.type" class="formRow">
+  <div *ngFor="let element of formModel.elements;let i = index;" [ngSwitch]="element.type" class="formRow" style="padding: 0px;">
             <span  *ngSwitchCase="'input'">
                 <div *ngIf="!element.hidden">
                   <label class="formLeftLabel" for="input_{{element.prop}}_{{i}}"><span *ngIf="element.required" class="required">*</span>{{element.label}}:</label>
@@ -99,9 +100,9 @@
                                           </span>
                                           <div class="arrayListContainer">
                                               <div *ngFor="let community of queryResultCommunityList;let index=index;" class="communityList" (click)="chooseCommunity(community)" [ngClass]="{lineChecked:community.checked}">
-                                                <span style="display: inline-block;padding: 3px 10px;background: #ddd;color: #fff;width: 30px;">
+                                                <!--<span style="display: inline-block;padding: 3px 10px;background: #ddd;color: #fff;width: 30px;">
                                                   {{index+1}}
-                                                </span>
+                                                </span>-->
                                                 <span style="display: inline-block;padding: 3px 10px;color: #000;">
                                                   {{community.name}}
                                                 </span>
@@ -159,9 +160,9 @@
                 </span>
             </span>
   </div>
-  <div class="submitBtnContainer">
+  <!--<div class="submitBtnContainer">
     <input type="submit" value="提交" class="submitBtn" [disabled]="formGroup.status=='INVALID'" >
-  </div>
+  </div>-->
 </form>
 </body>
 </html>

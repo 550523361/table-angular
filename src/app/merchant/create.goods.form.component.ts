@@ -64,7 +64,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
         },
         {
           label:"选择服务范围",
-          type:"input",
+          type:"baseAreaChoose",
           prop:"goodsServiceRangeDetail",
           defaultValue:"请输入商品服务范围",
           switcher:[

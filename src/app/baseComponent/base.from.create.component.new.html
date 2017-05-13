@@ -7,6 +7,11 @@
                   <span class="ng-invalid-msg"  *ngFor="let key of formGroup.get(element.prop).errors|keys ">{{formGroup.get(element.prop).errors[key]}}</span>
                 </div>
             </span>
+            <span  *ngSwitchCase="'baseAreaChoose'">
+                <div *ngIf="!element.hidden">
+                  <base-area-choose></base-area-choose>
+                </div>
+            </span>
             <span  *ngSwitchCase="'date'">
                 <div *ngIf="!element.hidden">
                   <label class="formLeftLabel" for="date_{{element.prop}}_{{i}}"><span *ngIf="element.required" class="required">*</span>{{element.label}}:</label>

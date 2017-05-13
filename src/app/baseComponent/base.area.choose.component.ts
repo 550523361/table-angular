@@ -7,7 +7,7 @@ import {BaseValidateService} from "../service/base.validate.service";
  * Created by Administrator on 2017/5/10.
  */
 
-
+declare var $;
 @Component({
   selector:"base-area-choose",
   templateUrl:"base.area.choose.component.html",
@@ -164,7 +164,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
         {
           label:"小区选择",
           type:"array",
-          prop:"activeTime",
+          prop:"cityChoose",
           noNeedValidateElement:true,
           options:[
             {
@@ -334,7 +334,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
             }
           ],
           validates:[control=>{
-            let param={prop:"provinceId",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
+            let param={prop:"provinceId",formModel:this.formModel,grandfather:"cityChoose",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayWatchers:1},param);
           }]
         },
@@ -513,9 +513,13 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
               defaultValue:"",
               click:data=>{
                 console.log(data)
-                let area={};
+                let area={name:""};
                 data.forEach(item=>{
                   area[item.prop]=item.value;
+                  let areaName=$("[name="+item.prop+"]:last option:selected").text();
+                  if(areaName!="请选择"&&area[item.prop]){
+                    area.name+=(area.name==""?"":"-")+areaName;
+                  }
                 });
                 this.chooseArea(area);
               }
