@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
 import {BaseValidateService} from "../service/base.validate.service";
 import {BaseFormCreateComponentNew} from "../baseComponent/base.from.create.component.new";
-import {FormBuilder, Validators} from "@angular/forms";
 import {BaseCustomerKeysPipe} from "../pipe/base.customer.keys.pipe";
 import {BaseDataService} from "../service/base.data.service";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 /**
  * Created by xkfeng on 2017/5/4.
