@@ -72,9 +72,21 @@ export class BaseTableListComponent implements OnChanges{
         columsType="href";
       }
       if(!this.tableListConfig.defaultColums){
-        this.tableListConfig.defaultColums=[{label:prop,prop:prop,type:columsType}];
+        if(this.tableListConfig.defaultColumsHeaderMap){
+          if(this.tableListConfig.defaultColumsHeaderMap[prop]){
+            this.tableListConfig.defaultColums=[{label:this.tableListConfig.defaultColumsHeaderMap[prop],prop:prop,type:columsType}];
+          }
+        }else{
+          this.tableListConfig.defaultColums=[{label:prop,prop:prop,type:columsType}];
+        }
       }else{
-        this.tableListConfig.defaultColums.push({label:prop,prop:prop,type:columsType});
+        if(this.tableListConfig.defaultColumsHeaderMap){
+          if(this.tableListConfig.defaultColumsHeaderMap[prop]){
+            this.tableListConfig.defaultColums.push({label:this.tableListConfig.defaultColumsHeaderMap[prop],prop:prop,type:columsType});
+          }
+        }else{
+          this.tableListConfig.defaultColums.push({label:prop,prop:prop,type:columsType});
+        }
       }
     }
     return pagerData;

@@ -3,6 +3,7 @@
  */
 export class TableListConfig{
   public defaultColums;
+  public defaultColumsHeaderMap;
   constructor(
     public url:string,
     public colums?,
