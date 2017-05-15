@@ -14,7 +14,7 @@ import {BaseDateChooseDirective} from "../directive/base.date.choose";
   styleUrls:["../baseComponent/base.from.create.component.css"],
   providers:[BaseCustomerKeysPipe,BaseValidateService,BaseDataService,BaseDateChooseDirective]
 })
-export class CreateGoodsFormComponent extends BaseFormCreateComponentNew implements OnInit{
+export class CreateMerchantFormComponent extends BaseFormCreateComponentNew implements OnInit{
 
   constructor(
     public formBuilder:FormBuilder,public baseValidateService:BaseValidateService,public baseDataService:BaseDataService,private router:Router
@@ -28,23 +28,23 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
       elements:[
         {
           type:"input",
-          label:"商品类型",
+          label:"店铺名称",
           prop:"goodsType",
           removeValidateUrl:"",
           placeholder:"请输入商品类型",
           defaultValue:"",
           required:true,
           validates:[control=>{
-            return this.baseValidateService.baseValidate(control,{required:true});
+            return this.baseValidateService.baseValidate(control,{required:true,maxlength:15});
           }]
         },
         {
           type:"radio",
-          label:"发放范围",
+          label:"服务区域",
           prop:"serviceRange",
           removeValidateUrl:"",
           placeholder:"商品发布范围",
-          defaultValue:"1",
+          defaultValue:"2",
           required:true,
           options:[
             {label:"自动覆盖店铺",value:1},
@@ -76,7 +76,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
         },
         {
           type:"select",
-          label:"商品分类",
+          label:"店铺类型",
           prop:"goodsCategory",
           defaultValue:"",
           remoteInfo:{
@@ -128,149 +128,72 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           ],
         },
         {
+          type:"checkbox",
+          label:"店铺标签",
+          prop:"sports",
+          options:[
+            {
+              label:"放心",
+              value:"0"
+            },
+            {
+              label:"专业",
+              value:"1"
+            },
+            {
+              label:"卫生",
+              value:"2"
+            },
+            {
+              label:"全面",
+              value:"3"}
+          ],
+          placeholder:"请输入名称",
+          defaultValue:"2",
+          required:true,
+          validates:[control=>{
+            let param={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
+            this.baseValidateService.baseValidate(control,{checkboxRequired:true,checkboxWatchers:true},param)
+          }]
+        },
+        {
           type:"input",
-          label:"商品名称",
-          prop:"goodsName",
-          placeholder:"请输入商品名称",
+          label:"一句话简评",
+          prop:"shotJump",
+          placeholder:"简要介绍",
           defaultValue:"",
           required:true,
           validates:[
             control=>{
-              let param={prop:"goodsName",formModel:this.formModel};
+              let param={prop:"shotJump",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,maxlength:5},param);
             }
           ]
         },
         {
           type:"input",
-          label:"商品原价",
-          prop:"goodsOrgPrice",
-          placeholder:"请输入商品原价",
+          label:"门店地址",
+          prop:"address",
+          placeholder:"门店地址",
           defaultValue:"",
           required:true,
           validates:[
             control=>{
-              let param={prop:"goodsOrgPrice",formModel:this.formModel};
+              let param={prop:"address",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
         },
         {
           type:"input",
-          label:"商品现价",
-          prop:"goodsCurPrice",
-          placeholder:"请输入商品现价",
+          label:"店铺简介",
+          prop:"introduce",
+          placeholder:"introduce",
           defaultValue:"",
           required:true,
           validates:[
             control=>{
-              let param={prop:"goodsCurPrice",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
-            }
-          ]
-        },
-        {
-          type:"input",
-          label:"商品库存",
-          prop:"goodsLib",
-          placeholder:"请输入商品库存",
-          defaultValue:"",
-          required:true,
-          validates:[
-            control=>{
-              let param={prop:"goodsLib",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
-            }
-          ]
-        },
-        {
-          type:"radio",
-          label:"是否限购",
-          prop:"isLimit",
-          placeholder:"请输入商品名称",
-          defaultValue:"1",
-          options:[
-            {
-              label:"是",
-              value:"0"
-            },
-            {
-              label:"否",
-              value:"1"
-            }
-          ],
-          required:true,
-          validates:[
-            control=>{
-              let param={prop:"isLimit",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{watchers:true},param);
-            }
-          ]
-        },
-        {
-          type:"input",
-          label:"每人限购",
-          prop:"buyLimitNum",
-          placeholder:"请输入商品名称",
-          defaultValue:"",
-          required:true,
-          switcher:[
-            {
-              prop:"isLimit",
-              showValue:"0"
-            }
-          ],
-          validates:[
-            control=>{
-              let param={prop:"buyLimitNum",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
-            }
-          ]
-        },
-        {
-          type:"radio",
-          label:"是否包邮",
-          prop:"free",
-          defaultValue:"0",
-          options:[
-            {
-              label:"包邮",
-              value:"0"
-            },
-            {
-              label:"不包邮",
-              value:"1"
-            }
-          ],
-          placeholder:"请输入商品名称",
-          required:true,
-          validates:[
-            control=>{
-              let param={prop:"buyLimitNum",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{required:true},param);
-            }
-          ]
-        },
-        {
-          type:"select",
-          label:"送达说明",
-          prop:"arriveInfo",
-          placeholder:"送达说明",
-          defaultValue:"1",
-          required:true,
-          options:[
-            {
-              label:"半小时",
-              value:"0"
-            },
-            {
-              label:"1小时",
-              value:"1"
-            }
-          ],
-          validates:[
-            control=>{
-              let param={prop:"arriveInfo",formModel:this.formModel};
+              let param={prop:"introduce",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true},param);
             }
           ]
@@ -307,61 +230,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             }
           ]
         },
-       /* {
-          type:"checkbox",
-          label:"体育运动",
-          prop:"sports",
-          options:[
-            {
-              label:"跑步",
-              value:"0"
-            },
-            {
-              label:"健身",
-              value:"1"
-            },
-            {
-              label:"瑜伽",
-              value:"2"
-            },
-            {
-              label:"太极",
-              value:"3"}
-          ],
-          placeholder:"请输入名称",
-          defaultValue:"2",
-          required:true,
-          validates:[control=>{
-            let param={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
-            this.baseValidateService.baseValidate(control,{checkboxRequired:true,checkboxWatchers:true},param)
-          }]
-        },*/
-        /*{
-          type:"array",
-          label:"活动时间",
-          prop:"compSizeInnerHeight",
-          options:[
-            {
-              label:"",
-              type:"input",
-              prop:"compA",
-              value:"0"
-            },
-            {
-              label:"至",
-              type:"input",
-              prop:"compB",
-              value:"1"
-            },
-          ],
-          validates:[
-            data=>{
-              // return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
-            }
-          ]
-        },*/
         {
-          label:"头图",
+          label:"店铺首图",
           prop:"firstPic",
           type:"upload",
           multiple:false,
@@ -374,7 +244,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           }]
         },
         {
-          label:"详情图片",
+          label:"店铺宣传图",
           prop:"detailPics",
           type:"array",
           multiple:false,
@@ -517,212 +387,49 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           }]
         },
         {
-          label:"商品焦点图",
-          type:"array",
-          prop:"goodsDetailImages",
-          validates:[control=>{
-            let param={prop:"goodsDetailImages",formModel:this.formModel,grandfather:"goodsDetailImages",formGroup:this.formGroup};
-            return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
-          }],
-          options:[
-            {
-              label:"",
-              prop:"detailA",
-              type:"upload",
-              value:"",
-              multiple:false,
-              uploadClass:{myUploadStyle2:true},
-              imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
-                console.log(control.value);
-                this.baseValidateService.baseValidate(control,{required:true});
-              }]
-            },
-            {
-              label:"",
-              prop:"detailB",
-              value:"",
-              type:"upload",
-              multiple:false,
-              uploadClass:{myUploadStyle2:true},
-              imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
-                console.log(control.value);
-                this.baseValidateService.baseValidate(control,{required:true});
-              }]
-            },
-            {
-              label:"",
-              prop:"detailC",
-              value:"",
-              type:"upload",
-              multiple:false,
-              uploadClass:{myUploadStyle2:true},
-              imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
-                console.log(control.value);
-                this.baseValidateService.baseValidate(control,{required:true});
-              }]
-            },
-            {
-              label:"",
-              prop:"detailD",
-              value:"",
-              type:"upload",
-              multiple:false,
-              uploadClass:{myUploadStyle2:true},
-              imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
-                console.log(control.value);
-                this.baseValidateService.baseValidate(control,{required:true});
-              }]
-            },
-            {
-              label:"",
-              prop:"detailE",
-              value:"",
-              type:"upload",
-              multiple:false,
-              uploadClass:{myUploadStyle2:true},
-              imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
-                console.log(control.value);
-                this.baseValidateService.baseValidate(control,{required:true});
-              }]
-            }
-          ]
-        },
-        {
-          label:"商品重量",
-          type:"input",
-          prop:"goodsWeight",
-          validates:[
-            control=>{
-              let param={prop:"goodsWeight",formModel:this.formModel};
-              return this.baseValidateService.baseValidate(control,{required:true,number:"###.###",maxvalue:"9999.99",minvalue:"0.001",maxlength:5},param);
-            }
-          ]
-        },
-        {
-          label:"描述",
-          type:"textarea",
-          prop:"goodsDetailInfo",
-          validates:[
-            data=>{
-
-            }
-          ]
-        },
-        {
-          label:"商品发布",
           type:"radio",
-          prop:"isPublish",
-          defaultValue:"0",
+          label:"合作形式",
+          prop:"isLimit",
+          placeholder:"请输入商品名称",
+          defaultValue:"1",
           options:[
             {
-              label:"放入仓库",
+              label:"合作店铺",
               value:"0"
             },
             {
-              label:"立即上架",
+              label:"展示店铺",
               value:"1"
             }
           ],
+          required:true,
           validates:[
             control=>{
-              let param={prop:"isPublish",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
+              let param={prop:"isLimit",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ]
         },
         {
-          label:"定时上架",
-          prop:"timerUpSheep",
           type:"input",
+          label:"每人限购",
+          prop:"buyLimitNum",
+          placeholder:"请输入商品名称",
+          defaultValue:"",
+          required:true,
           switcher:[
             {
-              prop:"isPublish",
+              prop:"isLimit",
               showValue:"0"
             }
           ],
-          defaultValue:"请输入上架时间"
-        },
-        {
-          label:"定时下架",
-          prop:"timerDownSheep",
-          type:"input",
-          defaultValue:"请输入下架时间"
-        },
-        {
-          label:"开始时间",
-          prop:"startTimeStr",
-          defaultValue:"",
-          type:"date",
-          chooseConfig:{
-            format:'YYYY-MM-DD hh:mm:ss',
-            placeholder:'请输入开始时间',
-            next:0.5,
-            maxelementid:'endTimeStr',
-            minelementid:null
-          },
-          validates:[control=>{
-          //let param={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
-          console.log(control.value)
-          //return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
-        }]
-        },
-        {
-          label:"结束时间",
-          prop:"endTimeStr",
-          defaultValue:"",
-          type:"date",
-          chooseConfig:{
-            format:'YYYY-MM-DD hh:mm:ss',
-            placeholder:'请输入开始时间',
-            next:0,
-            maxelementid:null,
-            minelementid:"startTimeStr"
-          }
-        },
-        {
-          label:"活动时间",
-          type:"array",
-          prop:"activeTime",
-          options:[
-            {
-              label:"",
-              prop:"activeStartTimeStr",
-              defaultValue:"",
-              type:"date",
-              value:"",
-              chooseConfig:{
-                format:'YYYY-MM-DD',
-                placeholder:'请输入开始时间',
-                next:0.5,
-                maxelementid:'activeEndTimeStr',
-                minelementid:null
-              }
-            },
-            {
-              label:"-",
-              prop:"activeEndTimeStr",
-              defaultValue:"",
-              type:"date",
-              value:"",
-              chooseConfig:{
-                format:'YYYY-MM-DD',
-                placeholder:'请输入开始时间',
-                next:0,
-                maxelementid:null,
-                minelementid:"activeStartTimeStr"
-              }
+          validates:[
+            control=>{
+              let param={prop:"buyLimitNum",formModel:this.formModel};
+              return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
-          ],
-          validates:[control=>{
-            let param={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
-            return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
-          }]
-        }
+          ]
+        },
       ]
     };
     this.initForm()

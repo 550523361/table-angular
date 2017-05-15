@@ -15,7 +15,23 @@ input.ng-invalid{
 }
 .ng-invalid-msg{
   font-size: 12px;
+  color: #d00;
+  position: relative;
+}
+.ng-invalid-msg:after{
+  /*content: "√";
   color: #f00;
+  background: #fff;
+  border: 1px solid #f00;
+  width: 8px;
+  height: 8px;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  vertical-align: text-top;
+  top:0px;
+  left: -15px;*/
 }
 .uploadImageContainer{
   display: inline-block;
@@ -96,10 +112,11 @@ input.ng-invalid{
   width: 16px;
   height: 16px;
   line-height: 16px;
-  background: #ff0000;
+  background: #7598ff;
   color: #fff;
   border-radius: 50%;
-  border: 1px solid #865d5d;
+  border: 1px solid #b1d2ec;
+  display: none;
 }
 .operateBtnContainer{
   position: absolute;
@@ -112,12 +129,18 @@ input.ng-invalid{
   background: rgba(0,0,0,0.3);
 }
 .operateBtnContainer .left,.operateBtnContainer .right{
-  display: inline-block;
-  background: rgba(255,0,0,0.6);
-  padding: 2px 10px;
+  display: none;
+  background: #333;
+  padding: 2px 6px;
   font-size: 12px;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 700;
+  color: #ffffff;
+}
+.uploadImageContainer:hover .left,.uploadImageContainer:hover .right,.uploadImageContainer:hover .deleteIcon{
+  display: inline-block;
+}
+.uploadImageContainer:hover{
+  background: #fff;
 }
 .operateBtnContainer .left{
   justify-self: start;
@@ -127,6 +150,7 @@ input.ng-invalid{
 }
 
 .arrayElementsContainer{
+  flex-grow: 0!important;
 }
 .submitBtnContainer{
   text-align: center;

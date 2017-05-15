@@ -75,7 +75,7 @@
                 </span>
             </span>
             <span  *ngSwitchCase="'array'">
-                <label  class="formLeftLabel"><span *ngIf="element.required" class="required">*</span>{{element.label}}:</label>
+                <label  class="formLeftLabel"><span *ngIf="element.required" class="required">*</span>{{element.label}}: </label>
                 <input type="text" formControlName="{{element.prop}}LinkValidate" *ngIf="!element.noNeedValidateElement==true">
                 <span formArrayName="{{element.prop}}" class="arrayElementsContainer">
                         <span *ngFor="let optionFormControl of formGroup.get(element.prop).controls;let ii=index;let first=first;let last=last;" [formGroupName]="ii">
@@ -93,9 +93,9 @@
                                           </span>
                                           <div class="arrayListContainer">
                                               <div *ngFor="let community of queryResultCommunityList;let index=index;" class="communityList" (click)="chooseCommunity(community)" [ngClass]="{lineChecked:community.checked}">
-                                                <!--<span style="display: inline-block;padding: 3px 10px;background: #ddd;color: #fff;width: 30px;">
+                                                <span style="display: inline-block;padding: 3px;background: #eee;color: #333;width: 20px;text-align: center;">
                                                   {{index+1}}
-                                                </span>-->
+                                                </span>
                                                 <span style="display: inline-block;padding: 3px 10px;color: #000;">
                                                   {{community.name}}
                                                 </span>
@@ -150,6 +150,8 @@
                  </span>
                 <span *ngIf="!element.noNeedValidateElement==true">
                   <span class="ng-invalid-msg"  *ngFor="let key of formGroup.get(element.prop+'LinkValidate').errors|keys ">{{formGroup.get(element.prop+'LinkValidate').errors[key]}}</span>
+                </span>
+                <span *ngIf="element.noNeedValidateElement==true">
                 </span>
             </span>
   </div>

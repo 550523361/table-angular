@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {BaseDataService} from "../service/base.data.service";
 import {BaseFormCreateComponentNew} from "./base.from.create.component.new";
 import {FormBuilder} from "@angular/forms";
@@ -15,6 +15,26 @@ declare var $;
   providers:[BaseDataService,BaseValidateService]
 })
 export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implements OnInit{
+
+  @Output()
+  chooseResult=new EventEmitter<boolean>();
+
+  noticeChooseResult(){
+    let communityList=this.chooseArray;
+    let areaList=this.chooseAreaArray;
+    let data={
+      communityList:communityList,
+      areaList:areaList,
+      list:areaList.concat(communityList)
+    };
+    this.noticeWrap(data);
+  }
+
+  noticeWrap(data){
+    console.log("noticeWrap",data)
+    this.chooseResult.emit(data);
+  }
+
   constructor(
     public formBuilder:FormBuilder,
     public baseDataService:BaseDataService,
@@ -164,7 +184,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
         {
           label:"小区选择",
           type:"array",
-          prop:"cityChoose",
+          prop:"communityChoose",
           noNeedValidateElement:true,
           options:[
             {
@@ -334,7 +354,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
             }
           ],
           validates:[control=>{
-            let param={prop:"provinceId",formModel:this.formModel,grandfather:"cityChoose",formGroup:this.formGroup};
+            let param={prop:"provinceId",formModel:this.formModel,grandfather:"communityChoose",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayWatchers:1},param);
           }]
         },
@@ -541,7 +561,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     let queryParmaBody={};
     data.forEach(item=>{
       queryParmaBody[item.prop]=item.value;
-    })
+    });
     let queryParam={
       baseUrl:"https://testbackend.goodaa.com.cn/ejiazi-backend/",
       url:"community/queryCommunitiesList.json",
@@ -570,6 +590,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
       result["checked"]=false;
       this.removeCommunity(community.id);
     }
+    this.noticeChooseResult();
   }
 
   findCommunity(findId,community){
@@ -593,6 +614,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
       }
     });
     this.chooseArray.splice(index,1);
+    this.noticeChooseResult();
   }
 
   chooseAreaArray=[];
@@ -602,6 +624,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     if(!checkResult){
       this.addArea(area);
     }
+    this.noticeChooseResult();
   }
 
   checkAreaCanAdd(area){
@@ -728,6 +751,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
       });
       this.chooseAreaArray.splice(index,1);
     })
+    this.noticeChooseResult();
   }
 
   /**
@@ -745,6 +769,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
       });
       this.chooseArray.splice(index,1);
     })
+    this.noticeChooseResult();
   }
 
   /**

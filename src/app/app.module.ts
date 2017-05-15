@@ -25,7 +25,8 @@ import {CreateGoodsFormComponentFormGroup} from "./merchant/create.goods.form.co
 import {BaseUploadDirectiveFormGroup} from "./directive/base.upload.directive.form.group";
 import {BaseDateChooseDirective} from "./directive/base.date.choose";
 import {BaseAreaChooseComponent} from "./baseComponent/base.area.choose.component";
-import {BasePopComponent} from "./baseComponent/base.pop.component";
+import {CreateMerchantFormComponent} from "./merchant/create.merchant.form.component";
+import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsCatogery.form.component";
 @NgModule({
   declarations: [
     LoginComponent,
@@ -95,10 +96,6 @@ import {BasePopComponent} from "./baseComponent/base.pop.component";
       {
         path:"areaChoose",
         component:BaseAreaChooseComponent
-      },
-      {
-        path:"basePop",
-        component:BasePopComponent
       }
 
     ]),

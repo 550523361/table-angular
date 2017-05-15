@@ -14,6 +14,14 @@
   justify-content: space-between;
   margin-left:0px;
 }
+.communityList:hover{
+  background: rgba(117, 152, 255, 0.12);
+  color: #e00!important;
+  cursor: pointer!important;
+}
+.communityList:hover span{
+  color: #e00!important;
+}
 .arrayListContainer{
   max-height: 300px;
   overflow-y: auto;

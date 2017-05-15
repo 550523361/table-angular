@@ -21,6 +21,10 @@ export class BaseFormCreateComponentNew{
       this.formGroup=this.formBuilder.group(this.recreateFormByModel());
   }
 
+  chooseResultFun(data){
+    console.log("chooseResult",data);
+  }
+
   operateUtil($event,element,operateType,formControl,index){
     $event.stopPropagation();
     $event.preventDefault();

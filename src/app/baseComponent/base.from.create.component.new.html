@@ -9,7 +9,7 @@
             </span>
             <span  *ngSwitchCase="'baseAreaChoose'">
                 <div *ngIf="!element.hidden">
-                  <base-area-choose></base-area-choose>
+                  <base-area-choose (chooseResult)="chooseResult($event)"></base-area-choose>
                 </div>
             </span>
             <span  *ngSwitchCase="'date'">
