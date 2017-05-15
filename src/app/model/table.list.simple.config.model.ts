@@ -4,6 +4,7 @@
 export class TableListSimpleConfig{
   public defaultColums;
   public defaultColumsHeaderMap;
+  public watcher;
   constructor(
     public url:string,
     public colums?,

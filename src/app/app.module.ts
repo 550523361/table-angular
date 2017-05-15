@@ -28,6 +28,7 @@ import {BaseAreaChooseComponent} from "./baseComponent/base.area.choose.componen
 import {CreateMerchantFormComponent} from "./merchant/create.merchant.form.component";
 import {BasePopComponent} from "./baseComponent/base.pop.component";
 import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsCatogery.form.component";
+import {BaseTestPopComponent} from "./test/base.test.pop.component";
 @NgModule({
   declarations: [
     LoginComponent,
@@ -53,7 +54,8 @@ import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsC
     BaseAreaChooseComponent,
     CreateMerchantFormComponent,
     CreateMallGoodsCatogeryFormComponent,
-    BasePopComponent
+    BasePopComponent,
+    BaseTestPopComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +113,10 @@ import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsC
       {
         path:"basePop",
         component:BasePopComponent
+      },
+      {
+        path:"testPop",
+        component:BaseTestPopComponent
       }
     ]),
     ReactiveFormsModule
