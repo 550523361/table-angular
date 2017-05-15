@@ -1,11 +1,10 @@
 /**
  * Created by Administrator on 2017/4/20.
  */
-
-
 import {Injectable} from "@angular/core";
-import {Http, Headers, RequestOptions, URLSearchParams, Request} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, Response} from "@angular/http";
 import {Observable} from "rxjs";
+import {PromiseObservable} from "rxjs/observable/PromiseObservable";
 declare var layer;
 @Injectable()
 export class BaseDataService{
@@ -40,9 +39,17 @@ export class BaseDataService{
     params.body=param.param;
     params.method=param.httpMethod||'post';
     params.url=(param.baseUrl||this.baseUrl)+param.url;
-    var request=new Request(params);
-    //var popId=layer.open({type: 3});
-    return params.method=="post"?this.http.request(request,params):this.http.get(params.url+"?"+this.obj2queryString(option.body),option);
+    let request=new Request(params);
+    let popId=layer.open({type: 3});
+    let response:Observable<Response>=params.method=="post"?this.http.request(request,params):this.http.get(params.url+"?"+this.obj2queryString(option.body),option);
+    response.subscribe(data=> {
+      layer.close(popId);
+      return Observable.create((Observable) => {
+        Observable.next(data);
+      })
+    });
+    return response;
+    //return params.method=="post"?this.http.request(request,params):this.http.get(params.url+"?"+this.obj2queryString(option.body),option);
   }
 
   save():any{

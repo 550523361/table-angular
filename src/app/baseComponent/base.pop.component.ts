@@ -1,6 +1,6 @@
-
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, SimpleChange, OnChanges, OnInit, Input} from "@angular/core";
 import {TableListConfig} from "../model/table.list.config.model";
+import {TableListSimpleConfig} from "../model/table.list.simple.config.model";
 /**
  * Created by Administrator on 2017/5/15.
  */
@@ -10,18 +10,16 @@ import {TableListConfig} from "../model/table.list.config.model";
     templateUrl:"base.pop.component.html",
     styleUrls:["base.pop.component.css"]
 })
-export class BasePopComponent implements OnInit{
+export class BasePopComponent implements OnInit,OnChanges{
 
     /*@Input()*/
     tableListConfig:TableListConfig;
 
+    @Input()
+    simpleConfig:TableListSimpleConfig;
+
     query={
         queryElements:[
-            {
-                type:'hidden',
-                prop:"upShelves",
-                value:"1"
-            },
             {
                 label:'请选择省',
                 type:'select',
@@ -81,27 +79,33 @@ export class BasePopComponent implements OnInit{
                 placeholder:'商品名称',
                 prop:'name'
             }
-            ]
+        ]
+    };
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}){
+        console.log("this.simpleConfig",this.simpleConfig)
+        for (let propName in changes) {
+            let changedProp = changes[propName];
+            console.log(propName,changedProp);
+
+        }
     }
 
-    ngOnInit(){//[{label:'选择',type:"checkbox",prop:"id"}]
+    createTableListConfig(data){
+
+    }
+
+    ngOnInit(){
         let tableListConfig=new TableListConfig("advert/queryAdvertList.json",
             null,
-            [{label:"修改",click:function (item) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"state"},{label:"查看"}],
+            [{label:"选择",click:function (item) {console.log(item)}}],
             this.query.queryElements,"post"
         );
         tableListConfig.defaultColumsHeaderMap={
             name:"名称",
-            /*state:"状态",*/
-            /*jumpParam:"跳转参数",
-            sortOrder:"序号",
-            picUrl:"图片",*/
             communityName:"小区名称",
-            /*communityState:"小区状态",*/
             startDate:"开始时间",
             endDate:"结束时间",
-            /*stateName:"状态名称",
-            jumpTypeName:"跳转名称",*/
             pageTypeName:"页面类型"
         };
         this.tableListConfig=tableListConfig;

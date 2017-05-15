@@ -19,7 +19,7 @@ export class LoginComponent{
     let email:string=this.email;
     let passwd:string=this.passwd;
     this.userLoginService.login({email,passwd})
-      .subscribe(data=>{
+      /*.subscribe(data=>{
         alert(23424)
         let result=data.json();
         if(result.code==200){
@@ -28,6 +28,6 @@ export class LoginComponent{
           this.userLoginService.updateLoginInfo(userInfo);
           this.router.navigate(["demoForm"]);
         }
-      });
+      });*/
   }
 }

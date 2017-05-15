@@ -539,7 +539,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
   queryResultCommunityList;
   queryCommunityList(data){
     let queryParmaBody={};
-    data.activeTime.forEach(item=>{
+    data.forEach(item=>{
       queryParmaBody[item.prop]=item.value;
     })
     let queryParam={
