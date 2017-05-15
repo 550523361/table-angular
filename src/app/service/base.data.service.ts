@@ -40,7 +40,7 @@ export class BaseDataService{
     params.method=param.httpMethod||'post';
     params.url=(param.baseUrl||this.baseUrl)+param.url;
     let request=new Request(params);
-    let popId=layer.open({type: 3});
+    let popId=layer.load(2, {shade: false});
     let response:Observable<Response>=params.method=="post"?this.http.request(request,params):this.http.get(params.url+"?"+this.obj2queryString(option.body),option);
     response.subscribe(data=> {
       layer.close(popId);
