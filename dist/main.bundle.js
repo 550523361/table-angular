@@ -6127,7 +6127,7 @@ module.exports = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta c
 /***/ 607:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loginContainer\">\r\n    <div class=\"topContainer\">\r\n        <img src=\"http://ejiaziimgtest.goodaa.com.cn/pic_b1860b4e-ef8b-4347-944e-892c1f524940.png\" alt=\"\">\r\n         e家子运营管理平台\r\n    </div>\r\n    <form class=\"loginForm\">\r\n        <div class=\"userName\"><input type=\"text\" [(ngModel)]=\"email\" name=\"emain\" placeholder=\"用户名\"></div>\r\n        <div class=\"password\"><input type=\"password\" [(ngModel)]=\"passwd\" name=\"passwd\" placeholder=\"密码\"></div>\r\n        <div class=\"loginBtnContainer\">\r\n            <input (click)=\"login()\" type=\"button\" value=\"登陆\">\r\n        </div>\r\n    </form>\r\n    <div class=\"footContainer\">copyright by goodaa.com.cn</div>\r\n</div>"
+module.exports = "<div class=\"loginContainer\">\n    <div class=\"topContainer\">\n        <img src=\"http://ejiaziimgtest.goodaa.com.cn/pic_b1860b4e-ef8b-4347-944e-892c1f524940.png\" alt=\"\">\n         e家子运营管理平台\n    </div>\n    <form class=\"loginForm\">\n        <div class=\"userName\"><input type=\"text\" [(ngModel)]=\"email\" name=\"emain\" placeholder=\"用户名\"></div>\n        <div class=\"password\"><input type=\"password\" [(ngModel)]=\"passwd\" name=\"passwd\" placeholder=\"密码\"></div>\n        <div class=\"loginBtnContainer\">\n            <input (click)=\"login()\" type=\"button\" value=\"登陆\">\n        </div>\n    </form>\n    <div class=\"footContainer\">copyright by goodaa.com.cn</div>\n</div>"
 
 /***/ }),
 
