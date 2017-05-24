@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {AppComponent} from "./app.component";
 import {LoginComponent} from "./loginComponent";
 import {HeroComponent} from "./hero.component";
@@ -29,6 +29,89 @@ import {CreateMerchantFormComponent} from "./merchant/create.merchant.form.compo
 import {BasePopComponent} from "./baseComponent/base.pop.component";
 import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsCatogery.form.component";
 import {BaseTestPopComponent} from "./test/base.test.pop.component";
+import {MainComponent} from "./main/main.component";
+import {MainComponentGuard} from "./guards/MainComponentGuard/main.component.guard";
+
+
+// 定义常量 嵌套自路由
+const appChildRoutes: Routes = [
+  {
+    path: "goods",
+    component: CreateGoodsFormComponent,
+    canDeactivate:[MainComponentGuard]
+  },
+  {path: "createMerchant", component: CreateMerchantFormComponent}/*,
+  {
+    path: '**', redirectTo: "goods"
+  }*/
+];
+
+const appRoutes:Routes=[
+  {
+    path:'login',
+    component:LoginComponent
+  },
+  {
+    path:"hero",
+    component:HeroComponent
+  },
+  {
+    path:"demoForm",
+    component:DemoFormComponent
+  },
+  {
+    path:"lotteryList",
+    component:LotteryListComponent
+  },
+  {
+    path:"listConfig",
+    component:BaseTableListConfigFormComponent
+  },
+  {
+    path:"formCreate",
+    component:BaseFormCreateComponent
+  },
+  {
+    path:"goodsForm",
+    component:GoodsFormComponent
+  },
+  {
+    path:"group",
+    component:CreateGoodsFormComponentFormGroup
+  },
+  {
+    path:"areaChoose",
+    component:BaseAreaChooseComponent
+  },
+  {
+    path:"merchant",
+    component:CreateMerchantFormComponent
+  },
+  {
+    path:"mallCatogery",
+    component:CreateMallGoodsCatogeryFormComponent
+  },
+  {
+    path:"basePop",
+    component:BasePopComponent
+  },
+  {
+    path:"testPop",
+    component:BaseTestPopComponent
+  },
+  {
+    path:"main",
+    component:MainComponent,
+    children:appChildRoutes,
+    canDeactivate:[MainComponentGuard],
+    canActivate:[MainComponentGuard],
+    canActivateChild:[MainComponentGuard]
+  },
+ {
+ path:"**",
+ component:LoginComponent
+ }
+];
 @NgModule({
   declarations: [
     LoginComponent,
@@ -55,73 +138,17 @@ import {BaseTestPopComponent} from "./test/base.test.pop.component";
     CreateMerchantFormComponent,
     CreateMallGoodsCatogeryFormComponent,
     BasePopComponent,
-    BaseTestPopComponent
+    BaseTestPopComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      {
-        path:'login',
-        component:LoginComponent
-      },
-      {
-        path:"hero",
-        component:HeroComponent
-      },
-      {
-        path:"demoForm",
-        component:DemoFormComponent
-      },
-      {
-        path:"lotteryList",
-        component:LotteryListComponent
-      },
-      {
-        path:"listConfig",
-        component:BaseTableListConfigFormComponent
-      },
-      {
-        path:"formCreate",
-        component:BaseFormCreateComponent
-      },
-      {
-        path:"goodsForm",
-        component:GoodsFormComponent
-      },
-      {
-        path:"goods",
-        component:CreateGoodsFormComponent
-      },
-      {
-        path:"group",
-        component:CreateGoodsFormComponentFormGroup
-      },
-      {
-        path:"areaChoose",
-        component:BaseAreaChooseComponent
-      },
-      {
-        path:"merchant",
-        component:CreateMerchantFormComponent
-      },
-      {
-        path:"mallCatogery",
-        component:CreateMallGoodsCatogeryFormComponent
-      },
-      {
-        path:"basePop",
-        component:BasePopComponent
-      },
-      {
-        path:"testPop",
-        component:BaseTestPopComponent
-      }
-    ]),
+    RouterModule.forRoot(appRoutes),
     ReactiveFormsModule
   ],
-  providers: [UserLoginService],
+  providers: [UserLoginService,MainComponentGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

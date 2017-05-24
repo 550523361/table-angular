@@ -2,16 +2,18 @@
  * Created by Administrator on 2017/4/20.
  */
 import {Injectable} from "@angular/core";
-import {Http, Headers, RequestOptions, URLSearchParams, Request, Response} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, Response, CookieXSRFStrategy} from "@angular/http";
 import {Observable} from "rxjs";
 import {PromiseObservable} from "rxjs/observable/PromiseObservable";
+import {document} from "@angular/platform-browser/src/facade/browser";
+import {Router} from "@angular/router";
 declare var layer;
+declare var $;
 @Injectable()
 export class BaseDataService{
-
-  baseUrl="https://testbackend.goodaa.com.cn/ejiazi-backend/";
-
-  constructor(private http:Http){
+  //https://testbackend.goodaa.com.cn
+  baseUrl="/ejiazi-backend/";
+  constructor(public http:Http,public route:Router){
 
   }
 
@@ -25,9 +27,17 @@ export class BaseDataService{
 
 
   listData(param){
+    if(param==null) return;
+    let loginUser=JSON.parse($.cookie("login_user")||"{}");
+    if(!loginUser.isLogin&&param.url!="login.json"){
+      this.route.navigate(["login"]);
+      return Observable.create((Observable) => {
+        Observable.next({error:"noLogin",json:data=>{return {}}});
+      })
+    }
     var heraders=new Headers();
     var option=new RequestOptions();
-    option.headers=heraders;
+    option.headers=param.headers||heraders;
     option.body=param.param;
     var searchParam=new URLSearchParams();
     for(let key in param.param){
@@ -37,6 +47,7 @@ export class BaseDataService{
     let params=new RequestOptions();
     params.search=searchParam;
     params.body=param.param;
+    params.headers=param.headers||heraders;
     params.method=param.httpMethod||'post';
     params.url=(param.baseUrl||this.baseUrl)+param.url;
     let request=new Request(params);

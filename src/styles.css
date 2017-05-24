@@ -3,7 +3,11 @@
   background: #fff;
   color: #f00;
 }
-
+html,body{
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
 ::-webkit-scrollbar
 {
   width: 6px;
@@ -34,4 +38,110 @@
   top: 0px;
   left: 0px;
   overflow: hidden;
+}
+.loginContainer{
+  background: url('http://ejiaziimgtest.goodaa.com.cn/pic_e94a421e-55fe-487f-a983-62083a6d7d12.jpg') center center no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.topContainer{
+  height: 80px;
+  background: #f34648;
+  line-height: 80px;
+  color: #fff;
+  padding-left: 10px;
+  font-size: 22px;
+}
+.topContainer img{
+  vertical-align: text-bottom;
+}
+
+.footContainer{
+  height: 80px;
+  background: #eee;
+  line-height: 80px;
+  text-align: center;
+}
+
+.loginForm{
+  width: 350px;
+  height: 310px;
+  background: #fff;
+  position: relative;
+  align-self: flex-end;
+  margin-right: 20%;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userName{
+  padding-left: 55px;
+  height: 48px;
+  background: #7598ff;
+  background: url('http://ejiaziimgtest.goodaa.com.cn/pic_a28a9a6a-060e-4f9a-9dff-08fdd743f42e.png') left center no-repeat;
+  background-size: contain;
+  margin-bottom: 10px;
+  border: 1px solid #eeeeee;
+}
+.password{
+  padding-left: 55px;
+  height: 48px;
+  background: #7598ff;
+  background: url('http://ejiaziimgtest.goodaa.com.cn/pic_56acc705-4d08-4660-8082-3ad4ad959745.png') left center no-repeat;
+  background-size: contain;
+  margin-bottom: 10px;
+  border: 1px solid #eeeeee;
+}
+.loginForm input{
+  height: 46px;
+  border: 0px solid #eeeeee;
+  width: 90%;
+  outline: none;
+}
+.loginBtnContainer{
+  text-align: center;
+}
+.loginBtnContainer input{
+  height: 48px;
+  border: 0px solid #eeeeee;
+  width: 90%;
+  background: #e41e44;
+  color: #fff;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.mainContainer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.topContainer{
+  height: 80px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.mainBottomContainer{
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.menuContainer{
+  background: #CCCCCC;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 160px;
 }

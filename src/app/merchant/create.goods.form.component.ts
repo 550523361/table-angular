@@ -6,6 +6,7 @@ import {BaseFormCreateComponentNew} from "../baseComponent/base.from.create.comp
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {BaseDateChooseDirective} from "../directive/base.date.choose";
+import {UserLoginService} from "../service/login.service";
 
 
 @Component({
@@ -17,9 +18,10 @@ import {BaseDateChooseDirective} from "../directive/base.date.choose";
 export class CreateGoodsFormComponent extends BaseFormCreateComponentNew implements OnInit{
 
   constructor(
-    public formBuilder:FormBuilder,public baseValidateService:BaseValidateService,public baseDataService:BaseDataService,private router:Router
+    public formBuilder:FormBuilder,public baseValidateService:BaseValidateService,public baseDataService:BaseDataService,private router:Router,public userLoginService:UserLoginService
   ){
     super(formBuilder,baseDataService);
+    console.log(userLoginService)
   }
 
   ngOnInit(){

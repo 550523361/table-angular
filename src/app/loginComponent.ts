@@ -3,6 +3,8 @@ import {FormsModule,Form} from  "@angular/forms"
 import {UserLoginService} from "./service/login.service";
 import {Router} from "@angular/router";
 import {UserModel} from "./model/user.model";
+
+declare var $;
 @Component({
   selector:"login",
   templateUrl:"login/login.html"
@@ -19,15 +21,18 @@ export class LoginComponent{
     let email:string=this.email;
     let passwd:string=this.passwd;
     this.userLoginService.login({email,passwd})
-      /*.subscribe(data=>{
-        alert(23424)
+      .subscribe(data=>{
         let result=data.json();
         if(result.code==200){
           var userInfo:UserModel=new UserModel(this.email);
                userInfo.isLogin=true;
+               $.cookie("login_user",JSON.stringify(userInfo));
+               $.cookie("complexId",result.complexId);
+               $.cookie("adminId",result.adminId);
+               $.cookie("sn",result.sn);
           this.userLoginService.updateLoginInfo(userInfo);
-          this.router.navigate(["demoForm"]);
+          this.router.navigate(["main"]);
         }
-      });*/
+      });
   }
 }

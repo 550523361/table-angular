@@ -1,27 +1,25 @@
 /**
  * Created by Administrator on 2017/4/20.
  */
-import {
-  Http, Headers, HttpModule, RequestMethod, URLSearchParams, RequestOptions,
-  RequestOptionsArgs, Response
-} from "@angular/http"
+import {Http, Headers, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {UserModel} from "../model/user.model";
-
+import {BaseDataService} from "./base.data.service";
+import {Router} from "@angular/router";
 
 
 @Injectable()
-export class UserLoginService{
+export class UserLoginService extends BaseDataService{
 
   userInfo:UserModel=new UserModel("");
-  constructor(private http:Http){
-
+  constructor(public http:Http,public route:Router){
+    super(http,route);
   }
 
-  loginUrl:string="http://localhost/ejiazi-backend/login";
+  loginUrl:string="http://backend.ejiazi.com:8093/ejiazi-backend/login";
 
-  logoutUrl:string="http://localhost/ejiazi-backend/systemUser/logout";
+  logoutUrl:string="http://backend.ejiazi.com:8093/ejiazi-backend/systemUser/logout.json";
 
   /**
    * 登陆方法
@@ -30,13 +28,15 @@ export class UserLoginService{
   login(param):Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }); //其实不表明 json 也可以, ng 默认好像是 json
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.loginUrl,this.obj2queryString(param),options);
+    //return this.http.post(this.loginUrl,this.obj2queryString(param),options);
+    //console.log("login",param)
+    return this.listData({baseUrl:"http://backend.ejiazi.com:8093/ejiazi-backend/",url:"login.json",param:param,httpMethod:"post",headers:headers})
   }
 
   /**
    * 登陆方法
    * @param param
-   */
+   */h
   logout():Observable<any>{
 
     /*var heraders=new Headers();
@@ -74,7 +74,6 @@ export class UserLoginService{
   updateLoginInfo(userInfo:UserModel){
     this.userInfo.name=userInfo.name;
     this.userInfo.isLogin=userInfo.isLogin;
-    console.log("updateLoginInfoupdateLoginInfo",userInfo)
   }
 
 }

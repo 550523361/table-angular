@@ -2,14 +2,15 @@ import {Injectable} from "@angular/core";
 import {BaseDataService} from "./base.data.service";
 import {Http} from "@angular/http";
 import {FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 /**
  * Created by xiankun.feng on 2017/5/3.
  */
 
 @Injectable()
 export class BaseValidateService extends BaseDataService{
-  constructor(http:Http){
-    super(http);
+  constructor(http:Http,route:Router){
+    super(http,route);
   }
 
   /**

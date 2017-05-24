@@ -1,6 +1,6 @@
 import {
     Component, SimpleChange, OnChanges, OnInit, Input, DoCheck, IterableDiffer,
-    KeyValueDiffer, KeyValueDiffers, IterableDiffers, KeyValueChangeRecord
+    KeyValueDiffer, KeyValueDiffers, IterableDiffers, KeyValueChangeRecord, ChangeDetectorRef
 } from "@angular/core";
 import {TableListConfig} from "../model/table.list.config.model";
 import {TableListSimpleConfig} from "../model/table.list.simple.config.model";
@@ -19,7 +19,8 @@ export class BasePopComponent implements OnInit,OnChanges,DoCheck{
     tableListConfig:TableListConfig;
 
     @Input()
-    set simpleConfig(data:TableListSimpleConfig){
+    simpleConfig(data:TableListSimpleConfig){
+        console.log("simpleConfig",console.log(data))
         /*this._keyValueDiffer = this._keyValueDiffers.find(data).create(null);
         this.simpleConfigData=data;*/
     };
@@ -27,7 +28,7 @@ export class BasePopComponent implements OnInit,OnChanges,DoCheck{
     private simpleConfigData:TableListSimpleConfig;
 
     constructor(
-        public _iterableDiffers: IterableDiffers, public _keyValueDiffers: KeyValueDiffers
+        public _iterableDiffers: IterableDiffers, public _keyValueDiffers: KeyValueDiffers,public changeDetectorRef:ChangeDetectorRef
     ){
 
     }
@@ -42,6 +43,7 @@ export class BasePopComponent implements OnInit,OnChanges,DoCheck{
     }
 
     ngDoCheck():void{
+        console.log("this.simpleConfig ngDoCheck")
         /*if(this._keyValueDiffers) {
             const changes = this._keyValueDiffer.diff(this.simpleConfigData);
             if (changes) {
