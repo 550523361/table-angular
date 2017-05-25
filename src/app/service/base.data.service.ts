@@ -29,7 +29,7 @@ export class BaseDataService{
   listData(param){
     if(param==null) return;
     let loginUser=JSON.parse($.cookie("login_user")||"{}");
-    if(!loginUser.isLogin&&param.url!="login.json"){
+    if(!loginUser.isLogin&&param.url!="login"){
       this.route.navigate(["login"]);
       return Observable.create((Observable) => {
         Observable.next({error:"noLogin",json:data=>{return {}}});
@@ -46,7 +46,11 @@ export class BaseDataService{
 
     let params=new RequestOptions();
     params.search=searchParam;
-    params.body=param.param;
+    if(param.url=="login"){
+      params.body=this.obj2queryString(param.param)
+    }else{
+      params.body=param.param;
+    }
     params.headers=param.headers||heraders;
     params.method=param.httpMethod||'post';
     params.url=(param.baseUrl||this.baseUrl)+param.url;

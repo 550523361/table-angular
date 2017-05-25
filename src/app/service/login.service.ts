@@ -30,7 +30,7 @@ export class UserLoginService extends BaseDataService{
     let options = new RequestOptions({ headers: headers });
     //return this.http.post(this.loginUrl,this.obj2queryString(param),options);
     //console.log("login",param)
-    return this.listData({baseUrl:"http://backend.ejiazi.com:8093/ejiazi-backend/",url:"login.json",param:param,httpMethod:"post",headers:headers})
+    return this.listData({baseUrl:"/ejiazi-backend/",url:"login",param:param,httpMethod:"post",headers:headers})
   }
 
   /**

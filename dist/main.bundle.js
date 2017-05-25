@@ -159,7 +159,7 @@ var BaseDataService = (function () {
         if (param == null)
             return;
         var loginUser = JSON.parse($.cookie("login_user") || "{}");
-        if (!loginUser.isLogin && param.url != "login.json") {
+        if (!loginUser.isLogin && param.url != "login") {
             this.route.navigate(["login"]);
             return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (Observable) {
                 Observable.next({ error: "noLogin", json: function (data) { return {}; } });
@@ -175,7 +175,12 @@ var BaseDataService = (function () {
         }
         var params = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]();
         params.search = searchParam;
-        params.body = param.param;
+        if (param.url == "login") {
+            params.body = this.obj2queryString(param.param);
+        }
+        else {
+            params.body = param.param;
+        }
         params.headers = param.headers || heraders;
         params.method = param.httpMethod || 'post';
         params.url = (param.baseUrl || this.baseUrl) + param.url;
@@ -6605,7 +6610,7 @@ var UserLoginService = (function (_super) {
         var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["c" /* RequestOptions */]({ headers: headers });
         //return this.http.post(this.loginUrl,this.obj2queryString(param),options);
         //console.log("login",param)
-        return this.listData({ baseUrl: "http://backend.ejiazi.com:8093/ejiazi-backend/", url: "login.json", param: param, httpMethod: "post", headers: headers });
+        return this.listData({ baseUrl: "/ejiazi-backend/", url: "login", param: param, httpMethod: "post", headers: headers });
     };
     UserLoginService.prototype.logout = function () {
         /*var heraders=new Headers();
