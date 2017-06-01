@@ -103,7 +103,7 @@ export class LotteryListComponent  implements OnInit{
             casecadeParen:"",
             dropProps:["pid"],
             casecadeChild:"",
-            casecadeGrandsonList:[]
+            casecadeGrandsonList:[""]
           },
           {
             whenSwitchValue:'2',
@@ -147,7 +147,7 @@ export class LotteryListComponent  implements OnInit{
       {
         label:'搜索',
         type:'search',
-        check: function (queryParam) {
+        check: function (queryParam:any) {
         console.log("queryParamqueryParamqueryParam",queryParam);
         if(queryParam){
         var communityName=queryParam.communityName||"";
@@ -164,8 +164,8 @@ return true;
         label:'批量下架',
           type:'button',
         param:true,
-        click: function (data,list) {
-          let checkList=[].filter.call(list,item=>{return item.checked;})
+        click: function (data:any,list:any) {
+          let checkList:any=[].filter.call(list,(item:any)=>{return item.checked;})
           console.log(data,checkList);
         }
       },
@@ -173,10 +173,10 @@ return true;
         label:'导出',
         type:'button',
         param:true,
-        listener: function (queryParam,dataList) {
+        listener: function (queryParam:any,dataList:any) {
           console.log(queryParam,dataList);
         },
-        click: function (queryParam,dataList) {
+        click: function (queryParam:any,dataList:any) {
           console.log(queryParam,dataList);
         }
       }
@@ -185,25 +185,25 @@ return true;
   listConfig:TableListConfig;
   listAdvertConfig:TableListConfig;
   listUserConfig:TableListConfig;
-  listAdapter(listData){
-    var result=listData.page;
-    result["dataPerPage"]=result.content.map(item=>item.user);
+  listAdapter(listData:any){
+    let result:any=listData.page;
+    result["dataPerPage"]=result.content.map((item:any)=>item.user);
     return result;
   }
   ngOnInit(){
     this.listConfig=new TableListConfig("lottery/winLog/queryLotteryWinLogList",
       [{prop:'lotteryName',label:"活动名称"}],
-      [{label:"修改",click:function (item) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"lotteryStatus"}],
+      [{label:"修改",click:function (item:any) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"lotteryStatus"}],
       this.query.queryElements,"get"
     );
     this.listAdvertConfig=new TableListConfig("advert/queryAdvertList.json",
       [{label:'选择',type:"checkbox",prop:"id"}],
-      [{label:"修改",click:function (item) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"state"},{label:"查看"}],
+      [{label:"修改",click:function (item:any) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"state"},{label:"查看"}],
       this.query.queryElements,"post"
     );
     this.listUserConfig=new TableListConfig("user/list",
       [{label:'选择',type:"checkbox",prop:"id"}],
-      [{label:"修改",click:function (item) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"status"},{label:"查看"}],
+      [{label:"修改",click:function (item:any) {console.log(item)}},{label:"",map:{1:'查看',2:'修改',3:'停止'},prop:"status"},{label:"查看"}],
       this.query.queryElements,
       "get",
        this.listAdapter,{

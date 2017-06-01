@@ -28,6 +28,8 @@ import {MainComponent} from "./main/main.component";
 import {MainComponentGuard} from "./guards/MainComponentGuard/main.component.guard";
 import {GoodsFormComponent} from "./merchant/goods.form.component";
 import {CreateGoodsFormComponent} from "./merchant/create.goods.form.component";
+import {BaseFormCreateComponentNew} from "./baseComponent/base.from.create.component.new";
+import {BaseFormCreateComponentNewFormGroup} from "./baseComponent/base.from.create.component.new.form.group";
 
 
 // 定义常量 嵌套自路由
@@ -117,6 +119,8 @@ const appRoutes:Routes=[
     BaseUploadDirectiveFormGroup,
     GoodsFormComponent,
     BaseModelComponent,
+    BaseFormCreateComponentNew,
+    BaseFormCreateComponentNewFormGroup,
     CreateGoodsFormComponent,
     CreateGoodsFormComponentFormGroup,
     BaseDateChooseDirective,

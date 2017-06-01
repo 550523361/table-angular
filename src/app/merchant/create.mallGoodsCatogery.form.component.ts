@@ -34,7 +34,7 @@ export class CreateMallGoodsCatogeryFormComponent extends BaseFormCreateComponen
           placeholder:"请输入商品类型",
           defaultValue:"",
           required:true,
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true,maxlength:5});
           }]
         },
@@ -47,7 +47,7 @@ export class CreateMallGoodsCatogeryFormComponent extends BaseFormCreateComponen
           require:true,
           defaultValue:"",
           imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true});
           }]
         },
@@ -61,21 +61,21 @@ export class CreateMallGoodsCatogeryFormComponent extends BaseFormCreateComponen
 
   }
 
-  close(data){
+  close(data:any){
     console.log("closedata",data)
   }
 
-  serviceArea;
-  chooseResult(data){
+  serviceArea:any;
+  chooseResult(data:any){
     console.log("goods form chooseResult",data);
     this.serviceArea=data;
   }
 
   submit(){
     console.log("sub sub this.formGroup",this.formGroup.value,this.serviceArea)
-    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe(data=>{
+    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe((data:any)=>{
       console.log(data)
-    },error=>{
+    },(error:any)=>{
       console.log(error);
     //  this.router.navigate(["lotteryList"])
     })

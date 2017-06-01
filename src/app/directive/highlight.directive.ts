@@ -25,7 +25,7 @@ export class HighLightDirective{
     this.highLight(this.myLeaveColor)
   }
 
-  private highLight(color){
+  private highLight(color:any){
     this.elementPre.nativeElement.style.background=color;
   }
 }

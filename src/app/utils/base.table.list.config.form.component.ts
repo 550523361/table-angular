@@ -24,15 +24,15 @@ export class BaseTableListConfigFormComponent{
     this.createQuerySimpleInputForm();
   }
 
-  reload;
+  reload:any;
   listConfigForm:FormGroup;
   columnFrom:FormGroup;
   operateFrom:FormGroup;
   queryComplexFrom:FormGroup;
   querySimpleInputFrom:FormGroup;
 
-  currentType="0";
-  addTypes=[
+  currentType:any="0";
+  addTypes:any=[
     {
       label:'添加列',
       value:0
@@ -219,11 +219,11 @@ export class BaseTableListConfigFormComponent{
     ]
   };
 
-  columns=[];
-  operator=[];
-  query=[];
+  columns:any=[];
+  operator:any=[];
+  query:any=[];
 
-queryModel=[
+queryModel:any=[
     {
       label:'请选择省',
       type:'select',
@@ -280,9 +280,9 @@ queryModel=[
     ];
 
   baseTableListConfig:TableListConfig=new TableListConfig("url",this.columns,this.operator,this.query);
-  configModel={"url":"activity/getActivityPageList.json","colums":[{"label":"活动ID","prop":"id","name":"id","type":""},{"label":"活动名称","prop":"name","name":"name","type":""},{"label":"报名人数","prop":"registrationCount","name":"registrationCount","type":""},{"label":"状态","prop":"activityStateName","name":"activityStateName","type":""}],"operator":[{"label":"导出报名信息","click":"click","operateNeedParam":"true","operateShowMap":"","operateIsExecuteProp":""}],"query":[{"label":"活动名称","placeholder":"请输入活动名称","type":"input","prop":"name"},{"label":"搜索","placeholder":"请输入活动名称","type":"search","prop":"name"}],"httpMethod":"get"}
-  previewTableListConfig;//=this.configModel;
-  defaultValue=Math.ceil(Math.random()*1000);
+  configModel:any={"url":"activity/getActivityPageList.json","colums":[{"label":"活动ID","prop":"id","name":"id","type":""},{"label":"活动名称","prop":"name","name":"name","type":""},{"label":"报名人数","prop":"registrationCount","name":"registrationCount","type":""},{"label":"状态","prop":"activityStateName","name":"activityStateName","type":""}],"operator":[{"label":"导出报名信息","click":"click","operateNeedParam":"true","operateShowMap":"","operateIsExecuteProp":""}],"query":[{"label":"活动名称","placeholder":"请输入活动名称","type":"input","prop":"name"},{"label":"搜索","placeholder":"请输入活动名称","type":"search","prop":"name"}],"httpMethod":"get"}
+  previewTableListConfig:any;//=this.configModel;
+  defaultValue:any=Math.ceil(Math.random()*1000);
 
   createForm(){
     this.listConfigForm=this.formBuild.group({
@@ -291,29 +291,29 @@ queryModel=[
     })
   }
   createColumnForm(){
-    let formGroup={};
-    this.columnFormData.inputs.forEach(item=>{
+    let formGroup:any={};
+    this.columnFormData.inputs.forEach((item:any)=>{
       formGroup[item.name]=[item.name,[Validators.required]];
     });
     this.columnFrom=this.formBuild.group(formGroup);
   }
   createOperateForm(){
     let formGroup={};
-    this.operatorFormData.inputs.forEach(item=>{
+    this.operatorFormData.inputs.forEach((item:any)=>{
       formGroup[item.name]=[item.name,[Validators.required]];
     });
     this.operateFrom=this.formBuild.group(formGroup);
   }
   createQueryComplexForm(){
     let formGroup={};
-    this.queryComplexFormData.inputs.forEach(item=>{
+    this.queryComplexFormData.inputs.forEach((item:any)=>{
       formGroup[item.name]=[item.name,[Validators.required]];
     });
     this.queryComplexFrom=this.formBuild.group(formGroup);
   }
   createQuerySimpleInputForm(){
     let formGroup={};
-    this.querySimpleInputFormData.inputs.forEach(item=>{
+    this.querySimpleInputFormData.inputs.forEach((item:any)=>{
       formGroup[item.name]=[item.name,[Validators.required]];
     });
     this.querySimpleInputFrom=this.formBuild.group(formGroup);
@@ -322,7 +322,7 @@ queryModel=[
 
   addColumnItem(){
       console.log("this.columnFrom.value",this.columnFrom.value);
-      let columnItem=this.columnFrom.value;
+      let columnItem:any=this.columnFrom.value;
       this.columns.push({
         label:columnItem.columnName,
         prop:columnItem.columnProp,
@@ -332,7 +332,7 @@ queryModel=[
   }
   addOperateItem(){
       console.log("this.operateFrom.value",this.operateFrom.value);
-      let columnItem=this.operateFrom.value;
+      let columnItem:any=this.operateFrom.value;
       this.operator.push({
         label:columnItem.operateLabel,
         click:columnItem.operateClick,
@@ -347,7 +347,7 @@ queryModel=[
 
   addQueryComplexItem(){
       console.log("this.queryComplexFrom.value",this.queryComplexFrom.value);
-      let columnItem=this.queryComplexFrom.value;
+      let columnItem:any=this.queryComplexFrom.value;
       this.query.push({
         queryLabel:columnItem.queryLabel,
         queryClick:columnItem.queryClick,
@@ -358,7 +358,7 @@ queryModel=[
   }
   addQuerySimpleInputItem(){
       console.log("this.querySimpleInputFrom.value",this.querySimpleInputFrom.value);
-      let columnItem=this.querySimpleInputFrom.value;
+      let columnItem:any=this.querySimpleInputFrom.value;
       this.query.push({
         label:columnItem.queryLabel,
         placeholder:columnItem.queryPlaceholder,
@@ -382,7 +382,7 @@ queryModel=[
   }
 
   addCasecadeQuery(){
-    this.queryModel.forEach(item=>{
+    this.queryModel.forEach((item:any)=>{
       this.query.push(item);
     });
     let date=new Date();

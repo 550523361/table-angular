@@ -53,7 +53,7 @@ export class BasePopComponent implements OnInit,OnChanges,DoCheck{
         }*/
     }
 
-    whatIsChanged(changes){
+    whatIsChanged(changes:any){
         changes.forEachAddedItem(
             (record: KeyValueChangeRecord) => {
                 console.log("Added item",record.key, record.currentValue)

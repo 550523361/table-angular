@@ -22,9 +22,9 @@ export class DemoFormComponent implements OnChanges{
 
   validateForm:FormGroup;
 
-  addressFormArray=[];
+  addressFormArray:any=[];
   constructor(private fb:FormBuilder,public userInfoService:UserLoginService){
-    var testAddress=[];
+    let testAddress:any=[];
     for(let i =0 ;i<3;i++){
       testAddress.push(this.createAddressModel());
     }
@@ -36,15 +36,15 @@ export class DemoFormComponent implements OnChanges{
     return this.heroFormBuilder.get("addresses") as FormArray;
   }
 
-  createForm(addresses){
+  createForm(addresses:any){
     this.heroFormBuilder=this.fb.group({
       name:['xkfeng',Validators.maxLength(13)],
       addresses:this.fb.array([])
     })
     console.log(addresses)
 
-    const addressFGs = addresses.map(address => this.fb.group(address));
-    const addressFormArray = this.fb.array(addressFGs);
+    const addressFGs:any = addresses.map((address:any) => this.fb.group(address));
+    const addressFormArray:any = this.fb.array(addressFGs);
     this.heroFormBuilder.setControl("addresses",addressFormArray);
 
     this.createValidateForm();
@@ -82,9 +82,8 @@ export class DemoFormComponent implements OnChanges{
 
   createValidateFormModel(){
     return {
-      name:["安徽"+Math.ceil(Math.random()*100),[Validators.required,Validators.maxLength(3),function (data) {
-        var name=(data as FormControl).value;
-        console.log(data as FormControl);
+      name:["安徽"+Math.ceil(Math.random()*100),[Validators.required,Validators.maxLength(3),function (data:any) {
+        let name:any=(data as FormControl).value;
         if(name.indexOf("xkfeng")!=-1){
           return {'forbiddenName': {name}}
         }

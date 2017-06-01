@@ -6,9 +6,9 @@ import {TableListConfig} from "../model/table.list.config.model";
  */
 
 
-declare var layer;
-declare var $;
-declare var _;
+declare var layer:any;
+declare var $:any;
+declare var _:any;
 
 @Component({
     selector:"base-pop-test",
@@ -18,7 +18,7 @@ declare var _;
 export  class BaseTestPopComponent implements OnInit{
     tableListConfig:TableListConfig;
     tableListSimpleConfig:TableListSimpleConfig;
-    query={
+    query:any={
         queryElements:[
           {
             label:'小区名称',
@@ -39,9 +39,9 @@ export  class BaseTestPopComponent implements OnInit{
     ]
   };
     ngOnInit(){
-      let tableListConfig=new TableListConfig("advert/queryAdvertList.json",
+      let tableListConfig:TableListConfig=new TableListConfig("advert/queryAdvertList.json",
         null,
-        [{label:"选择",click:data=>{
+        [{label:"选择",click:(data:any)=>{
           this.chooseSimple(data);
         }}],
         this.query.queryElements,"post"
@@ -61,20 +61,20 @@ export  class BaseTestPopComponent implements OnInit{
 
 
 
-    advert;
-    chooseSimple(data){
+    advert:any;
+    chooseSimple(data:any){
       this.advert=data;
       this.tableListConfig.operator[0].label="已选"
       layer.close(this.popId);
     }
 
-    popId;
+    popId:any;
 
     popTest(){
         this.popNoCopy($("#testPop"),"70%","60%");
     }
 
-    popNoCopy(dom, width?, height?, callBack?, data?) {
+    popNoCopy(dom:any, width?:any, height?:any, callBack?:any, data?:any) {
         if (width == undefined) {
             width = "80%";
         }
@@ -95,7 +95,7 @@ export  class BaseTestPopComponent implements OnInit{
             closeBtn: null,
             zIndex: layer.zIndex,
             area: [width, height],
-            success: function (layer, index) {
+            success: function (layer:any, index:any) {
                 if (typeof  callBack == 'function') {
                     callBack(data);
                 }

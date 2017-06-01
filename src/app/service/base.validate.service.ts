@@ -21,11 +21,11 @@ export class BaseValidateService extends BaseDataService{
    * @param param 异步校验参数配置 如商品名称全商家不重名，此时商户id可以配置上就可以自动携带作为查询条件
    * @returns {{}} 返回验证结果 是json对象或Promise实例(异步校验)
    */
-  baseValidate(prop:any,rulues,param={},remoteService={}):any{
-    let error={};
-    let value=prop.value||"";
+  baseValidate(prop:any,rulues:any,param:any={},remoteService:any={}):any{
+    let error:any={};
+    let value:any=prop.value||"";
     for(let key in rulues){
-      let ruleValue=rulues[key];
+      let ruleValue:any=rulues[key];
       if(key=="required"&&value==""){
         error= {"required":"不能为空"};
         break;
@@ -36,19 +36,19 @@ export class BaseValidateService extends BaseDataService{
         error= {"maxlength":"不能少于"+ruleValue+"字符"};
         break;
       }else if(key=="number"){
-        let pattenStr=ruleValue;
-        let splitArr=pattenStr.split(".");
-        let aboveZero=null;
-        let bellowZero="";
+        let pattenStr:any=ruleValue;
+        let splitArr:any=pattenStr.split(".");
+        let aboveZero:any=null;
+        let bellowZero:any="";
         if(splitArr.length==2){
           aboveZero=pattenStr.split(".")[0];
           bellowZero=pattenStr.split(".")[1];
         }else if(splitArr.length==1){
           aboveZero=pattenStr.split(".")[0];
         }
-        let valueArr=value.split(".");
-        let valueAboveZero=null;
-        let valueBellowZero="";
+        let valueArr:any=value.split(".");
+        let valueAboveZero:any=null;
+        let valueBellowZero:any="";
         if(valueArr.length==2){
           valueAboveZero=value.split(".")[0];
           valueBellowZero=value.split(".")[1];
@@ -86,14 +86,14 @@ export class BaseValidateService extends BaseDataService{
         error= {"required":"不能小于"+ruleValue};
         break;
       }else if(key=="checkboxRequired"){
-        let grandfather=param["grandfather"];
-        let formGroup=param["formGroup"];
+        let grandfather:any=param["grandfather"];
+        let formGroup:any=param["formGroup"];
         if(!formGroup){
           continue;
         }
-        let grandfatherControl=formGroup.get(grandfather);
-        let lazyTimerId=setTimeout(function () {
-          let checkedNum=grandfatherControl.controls.filter(optionControl=>{
+        let grandfatherControl:any=formGroup.get(grandfather);
+        let lazyTimerId:any=setTimeout(function () {
+          let checkedNum:any=grandfatherControl.controls.filter((optionControl:any)=>{
             return optionControl.value.checked;
           }).length;
           if(checkedNum==0){
@@ -103,15 +103,15 @@ export class BaseValidateService extends BaseDataService{
         },10);
       }else if(key=="arrayUploadRequired"){
         error= {};
-        let grandfather=param["grandfather"]+"LinkValidate";
-        let formGroup=param["formGroup"];
+        let grandfather:any=param["grandfather"]+"LinkValidate";
+        let formGroup:any=param["formGroup"];
         if(!formGroup){
           continue;
         }
-        let grandfatherControl=formGroup.get(grandfather);
+        let grandfatherControl:any=formGroup.get(grandfather);
         if(prop.parent){
-          let lazyTimerId=setTimeout(function () {
-            let checkedNum=prop.parent.parent.controls.filter(optionControl=>{
+          let lazyTimerId:any=setTimeout(function () {
+            let checkedNum:any=prop.parent.parent.controls.filter((optionControl:any)=>{
               return optionControl.value.value!="";
             }).length;
             if(checkedNum<rulues["arrayUploadRequired"]*1){
@@ -126,26 +126,26 @@ export class BaseValidateService extends BaseDataService{
         }
       }else if(key=="checkboxWatchers"){
         error= {};
-        let propName=param["prop"];
-        let formModel=param["formModel"];
-        let formGroup=param["formGroup"];
+        let propName:any=param["prop"];
+        let formModel:any=param["formModel"];
+        let formGroup:any=param["formGroup"];
         if(formGroup){
-          let queryParam={};
-          let grandfather=param["grandfather"];
+          let queryParam:any={};
+          let grandfather:any=param["grandfather"];
           if(!formGroup){
             continue;
           }
-          let grandfatherControl=formGroup.get(grandfather);
-          let lazyTimerId=setTimeout(function () {
-            grandfatherControl.controls.forEach(optionControl=>{
-              let isChecked=optionControl.value.checked;
-              let optionValue=optionControl.value.value;
+          let grandfatherControl:any=formGroup.get(grandfather);
+          let lazyTimerId:any=setTimeout(function () {
+            grandfatherControl.controls.forEach((optionControl:any)=>{
+              let isChecked:any=optionControl.value.checked;
+              let optionValue:any=optionControl.value.value;
               for(let queryProp in formModel.elements){
-                let item=formModel.elements[queryProp];
-                let innerProp=item.prop;
+                let item:any=formModel.elements[queryProp];
+                let innerProp:any=item.prop;
                 if(propName!=innerProp&&item.switcher&&item.switcher[0].prop==propName){
-                  let watchersControl=formGroup.get(innerProp);
-                  let watcherValue=item.switcher[0].showValue;
+                  let watchersControl:any=formGroup.get(innerProp);
+                  let watcherValue:any=item.switcher[0].showValue;
                   if(watcherValue==optionValue){
                     if(isChecked){
                       watchersControl.enable({onlySelf:false,emitEvent:false});
@@ -165,23 +165,23 @@ export class BaseValidateService extends BaseDataService{
       }else if(key=="arrayWatchers"){
         error= {};
         if(!prop.parent) return;
-        let propName=prop.parent.controls["prop"].value;// who am i
-        let formModel=param["formModel"];
-        let formGroup=param["formGroup"];
+        let propName:any=prop.parent.controls["prop"].value;// who am i
+        let formModel:any=param["formModel"];
+        let formGroup:any=param["formGroup"];
         if(formGroup){
-          let queryParam={};
-          let grandfather=param["grandfather"];
+          let queryParam:any={};
+          let grandfather:any=param["grandfather"];
           if(!formGroup){
             continue;
           }
           let formValues={};
-          formGroup.value[grandfather].forEach(item=>{
+          formGroup.value[grandfather].forEach((item:any)=>{
             formValues[item.prop]=item.value;
           });
-          let grandfatherControl=formGroup.get(grandfather);
-          formModel.elements.forEach(element=>{
+          let grandfatherControl:any=formGroup.get(grandfather);
+          formModel.elements.forEach((element:any)=>{
             if(element.type=="array"&&element.keyPropMap&&grandfather==element.prop){
-              element.options.forEach(option=>{
+              element.options.forEach((option:any)=>{
                 if(option.switchers&&option.switchers.length>0&&option.switchers[0].prop==propName){
                   if(option.remoteInfo!=null){
                     option.remoteInfo.param[option.remoteInfo.param["extend"]]=value;
@@ -194,7 +194,7 @@ export class BaseValidateService extends BaseDataService{
                       option["options"]=option.remoteInfo.convert({});
                     }else{
                       console.log("element",element.prop)
-                      this.listData({url:option.remoteInfo.url,param:option.remoteInfo.param,httpMethod:option.remoteInfo.httpMethod}).subscribe(data=>{
+                      this.listData({url:option.remoteInfo.url,param:option.remoteInfo.param,httpMethod:option.remoteInfo.httpMethod}).subscribe((data:any)=>{
                         option["options"]=option.remoteInfo.convert(data.json())||data.json();
                       });
                     }
@@ -203,7 +203,7 @@ export class BaseValidateService extends BaseDataService{
               })
             }
           })
-          grandfatherControl.controls.forEach(optionControl=>{
+          grandfatherControl.controls.forEach((optionControl:any)=>{
             if(optionControl.controls["switchers"]&&optionControl.controls["switchers"].value["prop"]==propName&&optionControl.controls["value"].value!=""){
               optionControl.controls["value"].setValue("");
             }
@@ -213,17 +213,17 @@ export class BaseValidateService extends BaseDataService{
         break;
       }else if(key=="watchers"){
         error= {};
-        let propName=param["prop"];
-        let formModel=param["formModel"];
-        let formGroup:FormGroup=prop.parent;
+        let propName:any=param["prop"];
+        let formModel:any=param["formModel"];
+        let formGroup:any=prop.parent;
         if(formGroup){
-          let queryParam={};
+          let queryParam:any={};
           for(let queryProp in formModel.elements){
-            let item=formModel.elements[queryProp];
-            let innerProp=item.prop;
+            let item:any=formModel.elements[queryProp];
+            let innerProp:any=item.prop;
             if(propName!=innerProp&&item.switcher&&item.switcher[0].prop==propName){
-              let watchersControl=formGroup.get(innerProp);
-              let watcherValue=item.switcher[0].showValue;
+              let watchersControl:any=formGroup.get(innerProp);
+              let watcherValue:any=item.switcher[0].showValue;
               if(watcherValue==prop.value){
                 watchersControl.enable({onlySelf:false,emitEvent:false});
                 item.hidden=false;
@@ -237,13 +237,13 @@ export class BaseValidateService extends BaseDataService{
         break;
       }else if(key=="remote"){
         //http 远程验证。。。
-        let formGroup:FormGroup=prop.parent;
+        let formGroup:any=prop.parent;
         if(formGroup){
-          let queryParam={};
+          let queryParam:any={};
           for(let queryProp in param){
             queryParam[queryProp]=formGroup.get(queryProp).value;
           }
-          this.remoteSyncValidate({body:queryParam,value:value},remoteService).subscribe(item=>{
+          this.remoteSyncValidate({body:queryParam,value:value},remoteService).subscribe((item:any)=>{
             prop.setErrors({"remote":item.json().msg});
           });
         }
@@ -257,7 +257,7 @@ export class BaseValidateService extends BaseDataService{
    * @param param 校验参数
    */
   remoteValidate(param:any,remoteService:any={}):any{
-    let queryParam={
+    let queryParam:any={
         url:remoteService.url,
         baseUrl:remoteService.baseUrl,
         param:param.body,
@@ -265,7 +265,7 @@ export class BaseValidateService extends BaseDataService{
     };
     return new Promise(resolve=>{
       let remoteCheckResult=this.listData(queryParam);
-        remoteCheckResult.subscribe(data=>{
+        remoteCheckResult.subscribe((data:any)=>{
           let result=data.json();
           if(result.code=="1"){
             resolve();
@@ -285,7 +285,7 @@ export class BaseValidateService extends BaseDataService{
    * @param param 校验参数
    */
   remoteSyncValidate(param:any,remoteService:any={}):any{
-    let queryParam={
+    let queryParam:any={
         url:remoteService.url,
         baseUrl:remoteService.baseUrl,
         param:param.body,

@@ -5,7 +5,7 @@ export interface AppConfig{
 }
 
 export const HERO_DI_CONFIG:AppConfig={
-  title:'hero demo test',
+  title:'hero demo tesTt',
   version:"1.0.0"
 }
 

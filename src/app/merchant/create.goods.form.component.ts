@@ -36,7 +36,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           placeholder:"请输入商品类型",
           defaultValue:"",
           required:true,
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true});
           }]
         },
@@ -58,9 +58,9 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               showValue:1
             }
           ],
-          validates:[data=>{
-            let param={prop:"serviceRange",formModel:this.formModel};
-            let error=this.baseValidateService.baseValidate(data,{watchers:true},param);
+          validates:[(data:any)=>{
+            let param:any={prop:"serviceRange",formModel:this.formModel};
+            let error:any=this.baseValidateService.baseValidate(data,{watchers:true},param);
             return error;
           }]
         },
@@ -86,7 +86,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             url:"indexPromotion/initJumpTypes.json",
             httpMethod:"post",
             param:{name:"testName",promotionType:"1"},
-            convert:data=>{
+            convert:(data:any)=>{
                 let options=[
                   {
                     label:"请选择",
@@ -123,8 +123,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           placeholder:"请选择分类",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"sex",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"sex",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ],
@@ -137,8 +137,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"goodsName",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"goodsName",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,maxlength:5},param);
             }
           ]
@@ -151,8 +151,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"goodsOrgPrice",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"goodsOrgPrice",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -165,8 +165,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"goodsCurPrice",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"goodsCurPrice",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -179,8 +179,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"goodsLib",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"goodsLib",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -203,8 +203,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           ],
           required:true,
           validates:[
-            control=>{
-              let param={prop:"isLimit",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"isLimit",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ]
@@ -223,8 +223,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             }
           ],
           validates:[
-            control=>{
-              let param={prop:"buyLimitNum",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"buyLimitNum",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -247,8 +247,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           placeholder:"请输入商品名称",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"buyLimitNum",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"buyLimitNum",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true},param);
             }
           ]
@@ -271,8 +271,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             }
           ],
           validates:[
-            control=>{
-              let param={prop:"arriveInfo",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"arriveInfo",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true},param);
             }
           ]
@@ -290,8 +290,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
-            let param={prop:"afterSale",formModel:this.formModel,grandfather:"afterSale",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"afterSale",formModel:this.formModel,grandfather:"afterSale",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxWatchers:true},param)
           }]
         },
@@ -304,7 +304,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           }],
           prop:"goodsQurt",
           validates:[
-            data=>{
+            (data:any)=>{
               return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
             }
           ]
@@ -333,8 +333,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
-            let param={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxRequired:true,checkboxWatchers:true},param)
           }]
         },*/
@@ -357,7 +357,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             },
           ],
           validates:[
-            data=>{
+            (data:any)=>{
               // return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
             }
           ]
@@ -371,7 +371,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           require:true,
           defaultValue:"",
           imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true});
           }]
         },
@@ -390,7 +390,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -403,7 +403,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -416,7 +416,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -429,7 +429,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -442,7 +442,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -455,7 +455,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -468,7 +468,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -481,7 +481,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -494,7 +494,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -507,14 +507,14 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
             }
           ],
-          validates:[control=>{
-            let param={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayUploadRequired:3},param);
           }]
         },
@@ -522,8 +522,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           label:"商品焦点图",
           type:"array",
           prop:"goodsDetailImages",
-          validates:[control=>{
-            let param={prop:"goodsDetailImages",formModel:this.formModel,grandfather:"goodsDetailImages",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"goodsDetailImages",formModel:this.formModel,grandfather:"goodsDetailImages",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
           }],
           options:[
@@ -535,7 +535,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -548,7 +548,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -561,7 +561,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -574,7 +574,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -587,7 +587,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -599,8 +599,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           type:"input",
           prop:"goodsWeight",
           validates:[
-            control=>{
-              let param={prop:"goodsWeight",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"goodsWeight",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.###",maxvalue:"9999.99",minvalue:"0.001",maxlength:5},param);
             }
           ]
@@ -610,7 +610,7 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
           type:"textarea",
           prop:"goodsDetailInfo",
           validates:[
-            data=>{
+            (data:any)=>{
 
             }
           ]
@@ -631,8 +631,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             }
           ],
           validates:[
-            control=>{
-              let param={prop:"isPublish",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
+            (control:any)=>{
+              let param:any={prop:"isPublish",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ]
@@ -667,8 +667,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
             maxelementid:'endTimeStr',
             minelementid:null
           },
-          validates:[control=>{
-          //let param={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+          //let param:any={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
           console.log(control.value)
           //return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
         }]
@@ -720,8 +720,8 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
               }
             }
           ],
-          validates:[control=>{
-            let param={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"activeTime",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
           }]
         }
@@ -735,21 +735,21 @@ export class CreateGoodsFormComponent extends BaseFormCreateComponentNew impleme
 
   }
 
-  close(data){
+  close(data:any){
     console.log("closedata",data)
   }
 
-  serviceArea;
-  chooseResult(data){
+  serviceArea:any;
+  chooseResult(data:any){
     console.log("goods form chooseResult",data);
     this.serviceArea=data;
   }
 
   submit(){
     console.log("sub sub this.formGroup",this.formGroup.value,this.serviceArea)
-    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe(data=>{
+    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe((data:any)=>{
       console.log(data)
-    },error=>{
+    },(error:any)=>{
       console.log(error);
       this.router.navigate(["lotteryList"])
     })

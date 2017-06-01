@@ -25,7 +25,7 @@ export class UserLoginService extends BaseDataService{
    * 登陆方法
    * @param param
    */
-  login(param):Observable<any>{
+  login(param:any):Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }); //其实不表明 json 也可以, ng 默认好像是 json
     let options = new RequestOptions({ headers: headers });
     //return this.http.post(this.loginUrl,this.obj2queryString(param),options);
@@ -36,7 +36,7 @@ export class UserLoginService extends BaseDataService{
   /**
    * 登陆方法
    * @param param
-   */h
+   */
   logout():Observable<any>{
 
     /*var heraders=new Headers();

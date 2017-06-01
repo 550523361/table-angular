@@ -3,26 +3,26 @@ import {FormBuilder, FormGroup, FormArray, FormControl} from "@angular/forms";
 import {BaseDataService} from "../service/base.data.service";
 
 @Component({
-  selector:"base-form-create-component-new-form-group",
+  selector:"BaseFormCreateComponentNewFormGroup",
   template:"<span></span>"
 })
 export class BaseFormCreateComponentNewFormGroup{
 
-  formGroup:FormGroup;
-  formModel;
+  public formGroup:FormGroup;
+  public formModel:any;
   constructor( public formBuilder:FormBuilder,public baseDataService:BaseDataService){
 
   }
 
   submit(){
-    console.log("submit data....")
+    console.log("submit datafsdfsd....")
   }
 
   initForm(){
       this.formGroup=this.formBuilder.group(this.recreateFormByModel());
   }
 
-  operateUtil($event,element,operateType,formControl,index){
+  operateUtil($event:any,element:any,operateType:any,formControl:any,index:any){
     $event.stopPropagation();
     $event.preventDefault();
     console.log(element,operateType,formControl,index,typeof formControl,formControl instanceof FormControl);
@@ -43,7 +43,7 @@ export class BaseFormCreateComponentNewFormGroup{
 
   recreateFormByModel(){
     let formGroupModel={};
-    this.formModel.elements.forEach(item=>{
+    this.formModel.elements.forEach((item:any)=>{
       if(item.type=="checkbox"||item.type=="array"){
         const addressFormArray = this.formBuilder.array(item.options);
         formGroupModel[item.prop]=addressFormArray;
@@ -52,7 +52,7 @@ export class BaseFormCreateComponentNewFormGroup{
         }
       }else if(item.type=="select"){
         if(item.remoteInfo!=null){
-          this.baseDataService.listData({url:item.remoteInfo.url,param:item.remoteInfo.param,httpMethod:item.remoteInfo.httpMethod}).subscribe(data=>{
+          this.baseDataService.listData({url:item.remoteInfo.url,param:item.remoteInfo.param,httpMethod:item.remoteInfo.httpMethod}).subscribe((data:any)=>{
             item.options=item.remoteInfo.convert(data.json())||data.json();
           })
         }

@@ -12,12 +12,12 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
   @Input()
   queryElements:[any];
   @Input()
-  pageData;
-  queryButtons;
+  pageData:any;
+  queryButtons:any;
   @Input()
-  reInit;
-  dataQuery={query:{}};
-  queryParam={aa:121};
+  reInit:any;
+  dataQuery:any={query:{}};
+  queryParam:any={aa:121};
   ngOnInit(){
 
   }
@@ -33,41 +33,40 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
    * 属性变化监控
    * @param prop
    */
-  changeQueryParam(prop){
+  changeQueryParam(prop:any){
     this.changeHelp(prop);
   }
 
   changeHelp(prop:any={}){
     if(prop.type=="select"){
-      let currentSwitchValue=this.queryParam[prop.prop];
+      let currentSwitchValue:any=this.queryParam[prop.prop];
       if(prop.switchElements){
-        let needInitSelected=[].filter.call(prop.switchElements,item=>{if(item.whenSwitchValue==currentSwitchValue){ return true;}})[0];
+        let needInitSelected=[].filter.call(prop.switchElements,(item:any)=>{if(item.whenSwitchValue==currentSwitchValue){ return true;}})[0];
         console.log("needInitSelected",needInitSelected)
         if(needInitSelected){
           for(let key in needInitSelected.dropProps){
             delete this.queryParam[needInitSelected.dropProps[key]];
           }
-          this.baseDataService.listData({url:needInitSelected.dataUrl,param:this.queryParam,httpMethod:needInitSelected.httpMethod||"get"}).subscribe(data=>{
-            let listData=data.json();
+          this.baseDataService.listData({url:needInitSelected.dataUrl,param:this.queryParam,httpMethod:needInitSelected.httpMethod||"get"}).subscribe((data:any)=>{
+            let listData:any=data.json();
             this.dataQuery.query[needInitSelected.propKeyList]=listData[needInitSelected.propValueList];
             this.queryParam[needInitSelected.prop]=needInitSelected.defaultValue;
-          },error=>{
+          },(error:any)=>{
             console.log(error);
           });
         }
       }else if(prop.casecadeChild){
         let casecadeChild=this.findCasecadeChild(prop.casecadeChild);
-        console.log("casecadeChild",casecadeChild)
         if(casecadeChild.extendsProp){
           for(let seq in casecadeChild.extendsProp){
             this.queryParam[casecadeChild.extendsProp[seq]]=currentSwitchValue;
           }
         }
-        this.baseDataService.listData({url:casecadeChild.dataUrl,param:this.queryParam,httpMethod:casecadeChild.httpMethod||"get"}).subscribe(data=>{
-          let listData=data.json();
+        this.baseDataService.listData({url:casecadeChild.dataUrl,param:this.queryParam,httpMethod:casecadeChild.httpMethod||"get"}).subscribe((data:any)=>{
+          let listData:any=data.json();
           this.dataQuery.query[casecadeChild.propKeyList]=listData[casecadeChild.propValueList];
           this.queryParam[casecadeChild.prop]=casecadeChild.defaultValue;
-        },error=>{
+        },(error:any)=>{
           console.log(error);
         });
       }
@@ -77,10 +76,10 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
   }
 
 
-  findCasecadeChild(elementKey){
+  findCasecadeChild(elementKey:any){
     let result:any={};
     for(let j=0;j<this.queryElements.length;j++){
-      let item=this.queryElements[j];
+      let item:any=this.queryElements[j];
       if(item.prop==elementKey){
         result=item;
         break;
@@ -88,7 +87,7 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
 
       if(item.switchElements){
         for(let i=0;i<item.switchElements.length;i++){
-          let innerItem=item.switchElements[i];
+          let innerItem:any=item.switchElements[i];
           if(innerItem.prop == elementKey){
             result=innerItem;
           }
@@ -99,17 +98,17 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
   }
 
   @Output()
-  outClick=new EventEmitter<boolean>();
+  outClick:any=new EventEmitter<boolean>();
 
-  queryBtnClick(data){
+  queryBtnClick(data:any){
     this.outClick.emit(data);
   }
 
   initQueryElement(){
     /*n 级 级联查询开始*/
-    var queryParam=this.queryParam;
+    var queryParam:any=this.queryParam;
     if(this.queryElements==null||this.queryElements.length==0) return;
-    var requestUrlParam= [].filter.call(this.queryElements, function (item) {
+    var requestUrlParam= [].filter.call(this.queryElements, function (item:any) {
       if(item.dataUrl&&item.initQuery){
         return item;
       }
@@ -119,11 +118,11 @@ export class BaseTableListQueryComponent implements OnInit,OnChanges{
       let item=requestUrlParam[seq];
       if(item.casecadeParen==null||item.casecadeParen==""){
         /*顶级元素优先查询完成一级数据初始化*/
-        this.baseDataService.listData({url:item.dataUrl,param:this.queryParam,httpMethod:item.httpMethod||"get"}).subscribe(data=>{
+        this.baseDataService.listData({url:item.dataUrl,param:this.queryParam,httpMethod:item.httpMethod||"get"}).subscribe((data:any)=>{
           let listData=data.json();
           this.dataQuery.query[item.propKeyList]=listData[item.propValueList];
           this.queryParam[item.prop]=item.defaultValue;
-        },error=>{
+        },(error:any)=>{
           console.log(error);
         });
       }

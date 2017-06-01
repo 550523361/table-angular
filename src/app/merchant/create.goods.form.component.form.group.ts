@@ -6,7 +6,6 @@ import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {BaseFormCreateComponentNewFormGroup} from "../baseComponent/base.from.create.component.new.form.group";
 
-
 @Component({
   selector:"create-goods-form",
   templateUrl:"../baseComponent/base.from.create.component.new.form.group.html",
@@ -26,7 +25,7 @@ export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNe
       url:"goods/saveGoods.json",
       elements:[
         {
-          label:"详情图片",
+          label:"详情图片     sdfasdf",
           prop:"detailPics",
           type:"array",
           multiple:false,
@@ -40,8 +39,8 @@ export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNe
                 value:"",
                 multiple:false,
                 uploadClass:{myUploadStyle2:true},
-                imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-                validates:[control=>{
+                imageConfig:{id:"imgId",url:"imageUrl",detail:"大转cvhfghdfgh盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
+                validates:[(control:any)=>{
                   //let param={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
                   console.log(control)
                   //return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
@@ -57,7 +56,7 @@ export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNe
                 multiple:false,
                 uploadClass:{myUploadStyle2:true},
                 imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-                validates:[control=>{
+                validates:[(control:any)=>{
                   //let param={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
                   console.log(control)
                   //return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
@@ -65,7 +64,7 @@ export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNe
               }
             ]
           ],
-          validates:[control=>{
+          validates:[(control:any)=>{
             //let param={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
             console.log(control)
             //return this.baseValidateService.baseValidate(control,{arrayUploadRequired:1},param);
@@ -81,15 +80,15 @@ export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNe
 
   }
 
-  close(data){
+  close(data:any){
     console.log("closedata",data)
   }
 
   submit(){
     console.log("sub sub this.formGroup",this.formGroup.value)
-    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe(data=>{
+    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe((data:any)=>{
       console.log(data)
-    },error=>{
+    },(error:any)=>{
       console.log(error);
       this.router.navigate(["lotteryList"])
     })

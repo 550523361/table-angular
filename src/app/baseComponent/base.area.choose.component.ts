@@ -4,10 +4,10 @@ import {BaseFormCreateComponentNew} from "./base.from.create.component.new";
 import {FormBuilder} from "@angular/forms";
 import {BaseValidateService} from "../service/base.validate.service";
 /**
- * Created by Administrator on 2017/5/10.
+ * Created by Administrator on 2017/5/10dfghd.
  */
 
-declare var $;
+declare var $:any;
 @Component({
   selector:"base-area-choose",
   templateUrl:"base.area.choose.component.html",
@@ -17,12 +17,12 @@ declare var $;
 export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implements OnInit{
 
   @Output()
-  chooseResult=new EventEmitter<boolean>();
+  chooseResult:any=new EventEmitter<boolean>();
 
   noticeChooseResult(){
-    let communityList=this.chooseArray;
-    let areaList=this.chooseAreaArray;
-    let data={
+    let communityList:any=this.chooseArray;
+    let areaList:any=this.chooseAreaArray;
+    let data:any={
       communityList:communityList,
       areaList:areaList,
       list:areaList.concat(communityList)
@@ -30,7 +30,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     this.noticeWrap(data);
   }
 
-  noticeWrap(data){
+  noticeWrap(data:any){
     console.log("noticeWrap",data)
     this.chooseResult.emit(data);
   }
@@ -58,7 +58,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
             url:"indexPromotion/initJumpTypes.json",
             httpMethod:"post",
             param:{name:"testName",promotionType:"1"},
-            convert:data=>{
+            convert:(data:any)=>{
               let options=[
                 {
                   label:"请选择",
@@ -95,7 +95,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
           placeholder:"请选择分类",
           required:true,
           validates:[
-            control=>{
+            (control:any)=>{
               let param={prop:"sex",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
@@ -109,7 +109,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
+            (control:any)=>{
               let param={prop:"goodsName",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,maxlength:5},param);
             }
@@ -133,7 +133,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
           ],
           required:true,
           validates:[
-            control=>{
+            (control:any)=>{
               let param={prop:"isLimit",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
@@ -157,7 +157,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
             }
           ],
           validates:[
-            control=>{
+            (control:any)=>{
               let param={prop:"arriveInfo",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true},param);
             }
@@ -176,7 +176,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
+          validates:[(control:any)=>{
             let param={prop:"afterSale",formModel:this.formModel,grandfather:"afterSale",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxWatchers:true},param)
           }]
@@ -205,7 +205,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 url:"citys/queryOpeningCitiesList.json",
                 httpMethod:"get",
                 param:{extend:"pid"},
-                convert:data=>{
+                convert:(data:any)=>{
                   let options=[
                     {
                       label:"请选择",
@@ -214,7 +214,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                      item=>{
+                        (item:any)=>{
                         options.push({
                           label:item["name"],
                           value:item["id"]
@@ -226,9 +226,9 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 }
               },
               validates:[
-                control=>{
+                (control:any)=>{
                 console.log("aaaaaaaaaaaaaaaaaaaaaaa",control)
-                  let param={prop:"province",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
+                  let param:any={prop:"province",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
                   this.baseValidateService.baseValidate(control,{checkboxWatchers:true},param)
                 }
               ]
@@ -251,8 +251,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 httpMethod:"get",
                 param:{extend:"pid"},
                 propMap:{areaProvinceId:"provinceId",areaCityId:"cityId",areaDistrictId:"districtId"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -260,7 +260,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                      item=>{
+                        (item:any)=>{
                         options.push({
                           label:item["name"],
                           value:item["id"]
@@ -290,8 +290,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 httpMethod:"get",
                 param:{extend:"pid"},
                 propMap:{areaProvinceId:"provinceId",areaCityId:"cityId",areaDistrictId:"districtId"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -299,7 +299,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                      item=>{
+                        (item:any)=>{
                         options.push({
                           label:item["name"],
                           value:item["id"]
@@ -321,8 +321,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 url:"community/queryCommunitiesList.json",
                 httpMethod:"get",
                 param:{cityId:"testName",promotionType:"1",extend:"pid"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -330,7 +330,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                      item=>{
+                        (item:any)=>{
                         options.push({
                           label:item["name"],
                           value:item["id"]
@@ -347,14 +347,14 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
               prop:"searchBtn",
               type:"searchBtn",
               defaultValue:"",
-              click:data=>{
+              click:(data:any)=>{
                   console.log(data);
                 this.queryCommunityList(data);
               }
             }
           ],
-          validates:[control=>{
-            let param={prop:"provinceId",formModel:this.formModel,grandfather:"communityChoose",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"provinceId",formModel:this.formModel,grandfather:"communityChoose",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayWatchers:1},param);
           }]
         },
@@ -382,8 +382,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 url:"citys/queryOpeningCitiesList.json",
                 httpMethod:"get",
                 param:{extend:"pid"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -391,7 +391,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                        item=>{
+                        (item:any)=>{
                           options.push({
                             label:item["name"],
                             value:item["id"]
@@ -403,8 +403,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 }
               },
               validates:[
-                control=>{
-                  let param={prop:"province",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
+                (control:any)=>{
+                  let param:any={prop:"province",formModel:this.formModel,grandfather:"activeTime",formGroup:this.formGroup};
                   this.baseValidateService.baseValidate(control,{checkboxWatchers:true},param)
                 }
               ]
@@ -427,8 +427,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 httpMethod:"get",
                 param:{extend:"pid"},
                 propMap:{provinceId:"provinceId",cityId:"cityId",districtId:"districtId"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -436,7 +436,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                        item=>{
+                        (item:any)=>{
                           options.push({
                             label:item["name"],
                             value:item["id"]
@@ -466,8 +466,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 httpMethod:"get",
                 param:{extend:"pid"},
                 propMap:{provinceId:"provinceId",cityId:"cityId",districtId:"districtId"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -475,7 +475,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                        item=>{
+                        (item:any)=>{
                           options.push({
                             label:item["name"],
                             value:item["id"]
@@ -505,8 +505,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                 httpMethod:"get",
                 param:{},
                 propMap:{provinceId:"provinceId",cityId:"cityId",districtId:"districtId"},
-                convert:data=>{
-                  let options=[
+                convert:(data:any)=>{
+                  let options:any=[
                     {
                       label:"请选择",
                       value:""
@@ -514,7 +514,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
                   ];
                   if(data&&data.citiesList){
                     data.citiesList.forEach(
-                        item=>{
+                        (item:any)=>{
                           options.push({
                             label:item["name"],
                             value:item["id"]
@@ -531,12 +531,12 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
               prop:"addAreaBtn",
               type:"button",
               defaultValue:"",
-              click:data=>{
+              click:(data:any)=>{
                 console.log(data)
-                let area={name:""};
-                data.forEach(item=>{
+                let area:any={name:""};
+                data.forEach((item:any)=>{
                   area[item.prop]=item.value;
-                  let areaName=$("[name="+item.prop+"]:last option:selected").text();
+                  let areaName:any=$("[name="+item.prop+"]:last option:selected").text();
                   if(areaName!="请选择"&&area[item.prop]){
                     area.name+=(area.name==""?"":"-")+areaName;
                   }
@@ -545,8 +545,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
               }
             }
           ],
-          validates:[control=>{
-            let param={prop:"provinceId",formModel:this.formModel,grandfather:"areaChoose",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"provinceId",formModel:this.formModel,grandfather:"areaChoose",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayWatchers:1},param);
           }]
         }
@@ -556,10 +556,10 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     this.initForm()
   }
 
-  queryResultCommunityList;
-  queryCommunityList(data){
+  queryResultCommunityList:any;
+  queryCommunityList(data:any){
     let queryParmaBody={};
-    data.forEach(item=>{
+    data.forEach((item:any)=>{
       queryParmaBody[item.prop]=item.value;
     });
     let queryParam={
@@ -568,16 +568,16 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
       httpMethod:"get",
       param:queryParmaBody
     }
-    this.baseDataService.listData(queryParam).subscribe(resultDataRemote=>{
-      let resultData=resultDataRemote.json();
+    this.baseDataService.listData(queryParam).subscribe((resultDataRemote:any)=>{
+      let resultData:any=resultDataRemote.json();
       if(resultData&&resultData.code==1){
         this.queryResultCommunityList=resultData.data;
       }
     });
   }
-  chooseArray=[];
-  chooseCommunity(community){
-    let result=this.findCommunity(community.id,community);
+  chooseArray:any=[];
+  chooseCommunity(community:any){
+    let result:any=this.findCommunity(community.id,community);
     if(result==0){
       return;
     }
@@ -593,11 +593,11 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     this.noticeChooseResult();
   }
 
-  findCommunity(findId,community){
+  findCommunity(findId:any,community:any){
     if(!this.isCommunityInChooseArea(community)){
       return 0;
     }
-    let findCommunity=this.chooseArray.filter(community=>{
+    let findCommunity:any=this.chooseArray.filter((community:any)=>{
       if(community.id==findId){
         return community;
       }
@@ -605,9 +605,9 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     return findCommunity.length==0?null:findCommunity[0];
   }
 
-  removeCommunity(removeId){
-    let index=-1;
-    let findIndex=this.chooseArray.forEach((community,seq)=>{
+  removeCommunity(removeId:any){
+    let index:any=-1;
+    let findIndex:any=this.chooseArray.forEach((community:any,seq:any)=>{
       if(community.id==removeId){
         community.checked=false;
         index=seq;
@@ -617,20 +617,20 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     this.noticeChooseResult();
   }
 
-  chooseAreaArray=[];
+  chooseAreaArray:any=[];
 
-  chooseArea(area){
-    let checkResult=this.checkAreaCanAdd(area);
+  chooseArea(area:any){
+    let checkResult:any=this.checkAreaCanAdd(area);
     if(!checkResult){
       this.addArea(area);
     }
     this.noticeChooseResult();
   }
 
-  checkAreaCanAdd(area){
+  checkAreaCanAdd(area:any){
     /*1：检查区域 被覆盖，2：检查区域 覆盖区域，3：检查区域覆盖小区*/
-    let result;
-    this.chooseAreaArray.forEach(arrayArea=>{
+    let result:any;
+    this.chooseAreaArray.forEach((arrayArea:any)=>{
       if(arrayArea.provinceId==area.provinceId){
         if(arrayArea.cityId==""&&arrayArea.cityId==""&&arrayArea.districtId==""&&arrayArea.rings==""){
           result=arrayArea;/*被省覆盖 不添加当前区域*/
@@ -660,9 +660,9 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     });
     console.log(result,area);
 
-    let areaDeleteArr=[];
+    let areaDeleteArr:any=[];
     /*查找被新区域覆盖的已选择的区域*/
-    this.chooseAreaArray.forEach(arrayArea=>{
+    this.chooseAreaArray.forEach((arrayArea:any)=>{
       if(arrayArea.provinceId==area.provinceId&&arrayArea.cityId==area.cityId&&
           arrayArea.districtId==area.districtId&&arrayArea.rings==area.rings){
         //不要排除自己啊
@@ -707,7 +707,7 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     this.removeArea(areaDeleteArr);
 
     //3.查找和删除小区
-    let findDeleteCommunity=this.chooseArray.filter(community=>{
+    let findDeleteCommunity:any=this.chooseArray.filter((community:any)=>{
       if(area.provinceId==community.provinceId&&area.cityId==""){
         return community;//省
       }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings==""){
@@ -728,8 +728,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     return result;
   }
 
-  findArea(findId){
-    let findCommunity=this.chooseAreaArray.filter(community=>{
+  findArea(findId:any){
+    let findCommunity:any=this.chooseAreaArray.filter((community:any)=>{
       if(community.id==findId){
         return community;
       }
@@ -737,14 +737,14 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
     return findCommunity.length==0?null:findCommunity[0];
   }
 
-  addArea(area){
+  addArea(area:any){
     this.chooseAreaArray.push(area);
   }
 
-  removeArea(deleteArray){
-    deleteArray.forEach(deleteArea=>{
-      let index=-1;
-      let findIndex=this.chooseAreaArray.forEach((area,seq)=>{
+  removeArea(deleteArray:any){
+    deleteArray.forEach((deleteArea:any)=>{
+      let index:any=-1;
+      let findIndex:any=this.chooseAreaArray.forEach((area:any,seq:any)=>{
         if(area.provinceId==deleteArea.provinceId&&area.cityId==deleteArea.cityId&&area.districtId==deleteArea.districtId&&area.rings==deleteArea.rings){
           index=seq;
         }
@@ -758,10 +758,10 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
    * 批量删除小区
    * @param deleteArray
    */
-  removeCommunities(deleteArray){
-    deleteArray.forEach(deleteCommunity=>{
-      let index=-1;
-      let findIndex=this.chooseArray.forEach((community,seq)=>{
+  removeCommunities(deleteArray:any){
+    deleteArray.forEach((deleteCommunity:any)=>{
+      let index:any=-1;
+      let findIndex:any=this.chooseArray.forEach((community:any,seq:any)=>{
         if(community.id==deleteCommunity.id){
           community.checked=false;
           index=seq;
@@ -776,8 +776,8 @@ export class BaseAreaChooseComponent extends BaseFormCreateComponentNew implemen
    * 查找小区是否被已选择区域覆盖
    * @param community
    */
-  isCommunityInChooseArea(community){
-    let checkResult=this.chooseAreaArray.filter(area=>{
+  isCommunityInChooseArea(community:any){
+    let checkResult:any=this.chooseAreaArray.filter((area:any)=>{
         if(area.provinceId==community.provinceId&&area.cityId==""){
           return community;//省
         }else if(area.provinceId==community.provinceId&&area.cityId==community.cityId&&area.districtId==""&&area.rings==""){

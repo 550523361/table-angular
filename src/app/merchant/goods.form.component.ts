@@ -31,7 +31,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
       elements:[
         {
           type:"input",
-          label:"远程校验",
+          label:"远程校验wergsafasFGHDFHfadfgsdfASDFAgfdghgfsfdfgteer",
           prop:"name21",
           removeValidateUrl:"",
           placeholder:"请输入名称",
@@ -44,7 +44,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
             prop:"sex",
             showValue:0
           }],
-          validates:[control=>{
+          validates:[(control:any)=>{
             let remoteValidateRequiredParam={"name21":true,name1:true};
             let remoteService={
               url:"goods/existName",
@@ -67,7 +67,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
               showValue:1
             }
           ],
-          validates:[data=>{
+          validates:[(data:any)=>{
             let error=this.baseValidateService.baseValidate(data,{required:true,maxlength:15,minlength:1,number:"###.##",maxvalue:300.01,minvalue:100.00});
             return error;
           }]
@@ -96,7 +96,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
           placeholder:"请输入名称",
           required:true,
           validates:[
-            control=>{
+            (control:any)=>{
               let param={prop:"sex",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
@@ -153,7 +153,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
+          validates:[(control:any)=>{
             let param={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxRequired:true,checkboxWatchers:true},param)
           }]
@@ -167,7 +167,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
           }],
           prop:"innerHeight",
           validates:[
-            data=>{
+            (data:any)=>{
               return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
             }
           ]
@@ -191,7 +191,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
             },
           ],
           validates:[
-            data=>{
+            (data:any)=>{
              // return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
             }
           ]
@@ -203,7 +203,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
           multiple:false,
           uploadClass:{myUploadStyle:true},
           imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-          validates:[control=>{
+          validates:[(control:any)=>{
             console.log(control.value);
             this.baseValidateService.baseValidate(control,{required:true});
           }]
@@ -215,7 +215,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
           multiple:false,
           uploadClass:{myUploadStyle2:true},
           imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-          validates:[control=>{
+          validates:[(control:any)=>{
             console.log(control.value);
             this.baseValidateService.baseValidate(control,{required:true});
           }]
@@ -234,7 +234,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -247,7 +247,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -260,7 +260,7 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -277,15 +277,15 @@ export class GoodsFormComponent extends BaseFormCreateComponentNew implements On
 
   }
 
-  close(data){
+  close(data:any){
     console.log("closedata",data)
   }
 
   submit(){
     console.log("sub sub this.formGroup",this.formGroup.value)
-    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe(data=>{
+    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe((data:any)=>{
       console.log(data)
-    },error=>{
+    },(error:any)=>{
       console.log(error);
       this.router.navigate(["lotteryList"])
     })

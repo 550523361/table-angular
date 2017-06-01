@@ -34,7 +34,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           placeholder:"请输入商品类型",
           defaultValue:"",
           required:true,
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true,maxlength:15});
           }]
         },
@@ -56,8 +56,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               showValue:1
             }
           ],
-          validates:[data=>{
-            let param={prop:"serviceRange",formModel:this.formModel};
+          validates:[(data:any)=>{
+            let param:any={prop:"serviceRange",formModel:this.formModel};
             let error=this.baseValidateService.baseValidate(data,{watchers:true},param);
             return error;
           }]
@@ -84,7 +84,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
             url:"indexPromotion/initJumpTypes.json",
             httpMethod:"post",
             param:{name:"testName",promotionType:"1"},
-            convert:data=>{
+            convert:(data:any)=>{
                 let options=[
                   {
                     label:"请选择",
@@ -121,8 +121,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           placeholder:"请选择分类",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"sex",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"sex",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ],
@@ -151,8 +151,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
-            let param={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"sports",formModel:this.formModel,grandfather:"sports",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxRequired:true,checkboxWatchers:true},param)
           }]
         },
@@ -164,8 +164,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"shotJump",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"shotJump",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,maxlength:5},param);
             }
           ]
@@ -178,8 +178,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"address",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"address",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -192,8 +192,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           defaultValue:"",
           required:true,
           validates:[
-            control=>{
-              let param={prop:"introduce",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"introduce",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true},param);
             }
           ]
@@ -211,8 +211,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           placeholder:"请输入名称",
           defaultValue:"2",
           required:true,
-          validates:[control=>{
-            let param={prop:"afterSale",formModel:this.formModel,grandfather:"afterSale",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"afterSale",formModel:this.formModel,grandfather:"afterSale",formGroup:this.formGroup};
             this.baseValidateService.baseValidate(control,{checkboxWatchers:true},param)
           }]
         },
@@ -225,7 +225,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           }],
           prop:"goodsQurt",
           validates:[
-            data=>{
+            (data:any)=>{
               return this.baseValidateService.baseValidate(data,{required:true,number:"##.##",maxvalue:10,minvalue:0.5})
             }
           ]
@@ -239,7 +239,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           require:true,
           defaultValue:"",
           imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-          validates:[control=>{
+          validates:[(control:any)=>{
             return this.baseValidateService.baseValidate(control,{required:true});
           }]
         },
@@ -258,7 +258,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -271,7 +271,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -284,7 +284,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -297,7 +297,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -310,7 +310,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -323,7 +323,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -336,7 +336,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -349,7 +349,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -362,7 +362,7 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
@@ -375,14 +375,14 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
               multiple:false,
               uploadClass:{myUploadStyle2:true},
               imageConfig:{id:"imgId",url:"imageUrl",detail:"大转盘分享图标大小",size:"<30k","validate":true,extend:".png,.jpeg,.jpg"},
-              validates:[control=>{
+              validates:[(control:any)=>{
                 console.log(control.value);
                 this.baseValidateService.baseValidate(control,{required:true});
               }]
             }
           ],
-          validates:[control=>{
-            let param={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
+          validates:[(control:any)=>{
+            let param:any={prop:"detailPics",formModel:this.formModel,grandfather:"detailPics",formGroup:this.formGroup};
             return this.baseValidateService.baseValidate(control,{arrayUploadRequired:3},param);
           }]
         },
@@ -404,8 +404,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
           ],
           required:true,
           validates:[
-            control=>{
-              let param={prop:"isLimit",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"isLimit",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{watchers:true},param);
             }
           ]
@@ -424,8 +424,8 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
             }
           ],
           validates:[
-            control=>{
-              let param={prop:"buyLimitNum",formModel:this.formModel};
+            (control:any)=>{
+              let param:any={prop:"buyLimitNum",formModel:this.formModel};
               return this.baseValidateService.baseValidate(control,{required:true,number:"###.##",maxvalue:"9999.99",minvalue:"0.01",maxlength:5},param);
             }
           ]
@@ -440,21 +440,21 @@ export class CreateMerchantFormComponent extends BaseFormCreateComponentNew impl
 
   }
 
-  close(data){
+  close(data:any){
     console.log("closedata",data)
   }
 
-  serviceArea;
-  chooseResult(data){
+  serviceArea:any;
+  chooseResult(data:any){
     console.log("goods form chooseResult",data);
     this.serviceArea=data;
   }
 
   submit(){
     console.log("sub sub this.formGroup",this.formGroup.value,this.serviceArea)
-    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe(data=>{
+    this.baseDataService.listData({url:this.formModel.url,param:this.formGroup.value,httpMethod:"post"}).subscribe((data:any)=>{
       console.log(data)
-    },error=>{
+    },(error:any)=>{
       console.log(error);
       this.router.navigate(["lotteryList"])
     })

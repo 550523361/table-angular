@@ -14,7 +14,7 @@ export class AppComponent{
 
   }
 
-  activate(event){
+  activate(event:any){
     console.log('>>>>>>>>>>>>',event)
   }
 }

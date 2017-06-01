@@ -71,23 +71,23 @@ import {Component, Input, OnChanges, SimpleChange, Output, EventEmitter} from "@
 export class BaseTableListPager implements OnChanges{
 
   @Input()
-  pageData;
+  pageData:any;
 
   @Output()
   pageClick=new EventEmitter<boolean>();
 
-  changePage(page){
+  changePage(page:any){
     this.pageClick.emit(page);
   }
 
   choosePage(){
     this.changePage({pageNum:this.selectedPage,label:this.selectedPage});
   }
-  pages=[];
+  pages:any=[];
 
-  selectedPage;
+  selectedPage:any;
 
-  allPages=[];
+  allPages:any=[];
 
   ngOnChanges(changes:{[prop:string]:SimpleChange}){
     for (let propName in changes) {
@@ -98,10 +98,10 @@ export class BaseTableListPager implements OnChanges{
     }
   }
 
-  initPager(newValue, oldValue){
+  initPager(newValue:any, oldValue:any){
       this.pages=[];
       this.allPages=[];
-      var isPushPreShopFlag = false, isPushNextShopFlag = false;
+      let isPushPreShopFlag:any = false, isPushNextShopFlag:any = false;
       this.pageData = this.pageData || {
           totalRows: 0,
           totalPages: 0,
@@ -109,11 +109,11 @@ export class BaseTableListPager implements OnChanges{
           currentPage: 1
         };
       if (!this.pageData) return;
-      var totalRows = this.pageData.totalRows, rowsPerPage = this.pageData.rowsPerPage, currentPage = this.pageData.currentPage,totalPages = Math.floor((this.pageData.totalRows-1)/rowsPerPage)+1;
+      let totalRows:any = this.pageData.totalRows, rowsPerPage:any = this.pageData.rowsPerPage, currentPage:any = this.pageData.currentPage,totalPages:any = Math.floor((this.pageData.totalRows-1)/rowsPerPage)+1;
       this.selectedPage=currentPage;
 
       for(let i =0;i<totalPages;i++){
-        var page = {
+        let page = {
           pageNum: i+1,
           label: i+1,
           clickAble: (i+1)!=currentPage,
@@ -123,15 +123,15 @@ export class BaseTableListPager implements OnChanges{
       }
 
       /*总共显示个数*/
-      var showTotalNumber = this.pageData.showTotalNumber||7;
+      let showTotalNumber:any = this.pageData.showTotalNumber||7;
       if (totalPages > 1) {
-        var firstPage = {
+        let firstPage:any = {
           pageNum: 1,
           label: '首页',
           clickAble: true,
           isShow: currentPage > 1
         };
-        var prePage = {
+        let prePage:any = {
           pageNum: (this.pageData.currentPage - 1),
           clickAble: true,
           label: '上一页',
@@ -140,7 +140,7 @@ export class BaseTableListPager implements OnChanges{
         this.pages.push(firstPage);
         this.pages.push(prePage);
       }
-      for (var i = 1; i <= totalPages; i++) {
+      for (let i = 1; i <= totalPages; i++) {
         if (totalPages > showTotalNumber) {
           if (i == 1) {
             this.pages.push({
@@ -203,13 +203,13 @@ export class BaseTableListPager implements OnChanges{
         }
       }
       if (totalPages > 1) {
-        var lastPage = {
+        let lastPage:any = {
           pageNum: totalPages,
           label: '尾页',
           clickAble: true,
           isShow: currentPage < totalPages
         };
-        var nextPage = {
+        let nextPage:any = {
           pageNum: (this.pageData.currentPage + 1),
           label: '下一页',
           clickAble: true,

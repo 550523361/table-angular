@@ -7,8 +7,8 @@ import {Observable} from "rxjs";
 import {PromiseObservable} from "rxjs/observable/PromiseObservable";
 import {document} from "@angular/platform-browser/src/facade/browser";
 import {Router} from "@angular/router";
-declare var layer;
-declare var $;
+declare var layer:any;
+declare var $:any;
 @Injectable()
 export class BaseDataService{
   //https://testbackend.goodaa.com.cn
@@ -21,18 +21,18 @@ export class BaseDataService{
 
   }
 
-  list(param){
+  list(param:any){
      return this.http.post(param.url,param.body,param.options);
   }
 
 
-  listData(param){
+  listData(param:any){
     if(param==null) return;
     let loginUser=JSON.parse($.cookie("login_user")||"{}");
     if(!loginUser.isLogin&&param.url!="login"){
       this.route.navigate(["login"]);
-      return Observable.create((Observable) => {
-        Observable.next({error:"noLogin",json:data=>{return {}}});
+      return Observable.create((Observable:any) => {
+        Observable.next({error:"noLogin",json:(data:any)=>{return {}}});
       })
     }
     var heraders=new Headers();

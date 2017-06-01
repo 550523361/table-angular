@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {UserLoginService} from "../service/login.service";
 import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
-declare var $;
+declare var $:any;
 @Component({
     selector:"main-component",
     templateUrl:"main.component.html",
@@ -17,7 +17,7 @@ export class MainComponent implements OnInit{
 
     }
 
-    menuList;
+    menuList:any;
     ngOnInit(){
         this.menuList=[
             {
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit{
         ]
     }
 
-    navFunction(event,menu){
+    navFunction(event:any,menu:any){
         console.log(event,menu)
     }
 
@@ -63,7 +63,7 @@ export class MainComponent implements OnInit{
         this.router.navigate(["login"]);
     }
 
-    activate(event){
+    activate(event:any){
         if(this.userLoginService.userInfo.isLogin==false&&$.cookie("login_user")!=undefined){
             this.userLoginService.userInfo=JSON.parse($.cookie("login_user"));
         }else{

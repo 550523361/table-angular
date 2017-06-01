@@ -26,7 +26,7 @@ export class BaseTableListComponent implements OnChanges{
     for (let propName in changes) {
       let changedProp = changes[propName];
       if(this.tableListConfig.query){
-        this.tableListConfig.query.forEach(queryItem=>{
+        this.tableListConfig.query.forEach((queryItem:any)=>{
           this.queryParam[queryItem.prop]=queryItem.value;
         })
       }
@@ -40,7 +40,7 @@ export class BaseTableListComponent implements OnChanges{
 
   }
 
-  pagerDataHelper(dataType, data) {
+  pagerDataHelper(dataType:any, data:any) {
     var pagerData={};
     if (!data) {
       pagerData[dataType + "List"] = [];
@@ -65,7 +65,7 @@ export class BaseTableListComponent implements OnChanges{
     this.tableListConfig.defaultColums=null;
     let dataTemplate=pagerData["dataList"][0];
     for(let prop in dataTemplate){
-      let columsType=null;
+      let columsType:any=null;
       if(prop=="picUrl"){
         columsType="image";
       }else if(prop=="jumpParam"){
@@ -92,7 +92,7 @@ export class BaseTableListComponent implements OnChanges{
     return pagerData;
   }
 
-  queryDataByPage(param) {
+  queryDataByPage(param:any) {
     this.queryParam[this.tableListConfig.pager.pageSizeQueryProp]=this.tableListConfig.pager.pageSize||15;
     this.queryParam[this.tableListConfig.pager.pageNumQueryProp]= param&&param.pageNum||1;
     this.listData();
@@ -100,27 +100,27 @@ export class BaseTableListComponent implements OnChanges{
 
   listData(){
     let url=this.tableListConfig.url;
-    this.baseDataService.listData({url,param:this.queryParam,httpMethod:this.tableListConfig.httpMethod}).subscribe(data=>{
-      var result=data.json()||{data:{}};
+    this.baseDataService.listData({url,param:this.queryParam,httpMethod:this.tableListConfig.httpMethod}).subscribe((data:any)=>{
+      let result:any=data.json()||{data:{}};
       if(result.code=="1"){
         this.tableData.data=this.pagerDataHelper("data",this.tableListConfig.listAdapter&&this.tableListConfig.listAdapter(result.data)||result.data);
       }
     });
   }
 
-  batchChoose($event,param){
+  batchChoose($event:any,param:any){
     for(let key in this.tableData.data.dataList){
       this.tableData.data.dataList[key].checked=$event.target.checked
     }
   }
 
   /*分页功能触发*/
-  pageClick(page){
+  pageClick(page:any){
     this.queryDataByPage(page);
   }
 
   /*查询组件搜索按钮事件触发*/
-  queryClick(queryParam){
+  queryClick(queryParam:any){
     this.queryParam=queryParam||{};
     this.queryDataByPage({});
   }

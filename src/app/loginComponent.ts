@@ -4,7 +4,7 @@ import {UserLoginService} from "./service/login.service";
 import {Router} from "@angular/router";
 import {UserModel} from "./model/user.model";
 
-declare var $;
+declare var $:any;
 @Component({
   selector:"login",
   templateUrl:"login/login.html"
@@ -21,8 +21,8 @@ export class LoginComponent{
     let email:string=this.email;
     let passwd:string=this.passwd;
     this.userLoginService.login({email,passwd})
-      .subscribe(data=>{
-        let result=data.json();
+      .subscribe((data:any)=>{
+        let result:any=data.json();
         if(result.code==200){
           var userInfo:UserModel=new UserModel(this.email);
                userInfo.isLogin=true;
