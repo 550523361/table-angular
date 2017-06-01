@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, FormArray, FormControl} from "@angular/forms";
 import {BaseDataService} from "../service/base.data.service";
 
 @Component({
+  selector:"base-form-create-component-new-form-group",
   template:"<span></span>"
 })
 export class BaseFormCreateComponentNewFormGroup{

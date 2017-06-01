@@ -5,7 +5,6 @@ import {HttpModule} from "@angular/http";
 import {RouterModule, Routes} from "@angular/router";
 import {AppComponent} from "./app.component";
 import {LoginComponent} from "./loginComponent";
-import {HeroComponent} from "./hero.component";
 import {HighLightDirective} from "./directive/highlight.directive";
 import {DemoFormComponent} from "./form/demo.form.component";
 import {UserLoginService} from "./service/login.service";
@@ -14,13 +13,9 @@ import {BaseTableListComponent} from "./baseComponent/base.table.list.component"
 import {BaseTableListPager} from "./baseComponent/base.table.list.pager.component";
 import {BaseTableListQueryComponent} from "./baseComponent/base.table.list.query.component";
 import {BaseTableListConfigFormComponent} from "./utils/base.table.list.config.form.component";
-import {BaseFormCreateComponent} from "./baseComponent/base.from.create.component";
 import {BaseCustomerKeysPipe} from "./pipe/base.customer.keys.pipe";
 import {BaseUploadDirective} from "./directive/base.upload.directive";
-import {GoodsFormComponent} from "./merchant/goods.form.component";
-import {BaseFormCreateComponentNew} from "./baseComponent/base.from.create.component.new";
 import {BaseModelComponent} from "./baseComponent/base.model.component";
-import {CreateGoodsFormComponent} from "./merchant/create.goods.form.component";
 import {CreateGoodsFormComponentFormGroup} from "./merchant/create.goods.form.component.form.group";
 import {BaseUploadDirectiveFormGroup} from "./directive/base.upload.directive.form.group";
 import {BaseDateChooseDirective} from "./directive/base.date.choose";
@@ -31,6 +26,8 @@ import {CreateMallGoodsCatogeryFormComponent} from "./merchant/create.mallGoodsC
 import {BaseTestPopComponent} from "./test/base.test.pop.component";
 import {MainComponent} from "./main/main.component";
 import {MainComponentGuard} from "./guards/MainComponentGuard/main.component.guard";
+import {GoodsFormComponent} from "./merchant/goods.form.component";
+import {CreateGoodsFormComponent} from "./merchant/create.goods.form.component";
 
 
 // 定义常量 嵌套自路由
@@ -52,10 +49,6 @@ const appRoutes:Routes=[
     component:LoginComponent
   },
   {
-    path:"hero",
-    component:HeroComponent
-  },
-  {
     path:"demoForm",
     component:DemoFormComponent
   },
@@ -66,10 +59,6 @@ const appRoutes:Routes=[
   {
     path:"listConfig",
     component:BaseTableListConfigFormComponent
-  },
-  {
-    path:"formCreate",
-    component:BaseFormCreateComponent
   },
   {
     path:"goodsForm",
@@ -115,7 +104,6 @@ const appRoutes:Routes=[
 @NgModule({
   declarations: [
     LoginComponent,
-    HeroComponent,
     AppComponent,
     HighLightDirective,
     DemoFormComponent,
@@ -124,8 +112,6 @@ const appRoutes:Routes=[
     BaseTableListPager,
     BaseTableListQueryComponent,
     BaseTableListConfigFormComponent,
-    BaseFormCreateComponent,
-    BaseFormCreateComponentNew,
     BaseCustomerKeysPipe,
     BaseUploadDirective,
     BaseUploadDirectiveFormGroup,
