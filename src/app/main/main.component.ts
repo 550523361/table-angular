@@ -5,8 +5,8 @@ import {UserModel} from "../model/user.model";
 declare var $:any;
 @Component({
     selector:"main-component",
-    templateUrl:"main.component.html",
-    styleUrls:["main.component.css"]
+    templateUrl:"./../../app/main/main.component.html",
+    styleUrls:["./../../app/main/main.component.css"]
 })
 export class MainComponent implements OnInit{
 

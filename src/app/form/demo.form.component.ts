@@ -9,7 +9,7 @@ import {UserLoginService} from "../service/login.service";
 
 @Component({
   selector:"demo-form",
-  templateUrl:"demoForm.html"
+  templateUrl:"./demoForm.html"
 })
 export class DemoFormComponent implements OnChanges{
   heroForm=new FormGroup({

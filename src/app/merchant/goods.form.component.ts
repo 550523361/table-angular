@@ -15,8 +15,8 @@ import {Router} from "@angular/router";
 
 @Component({
   selector:"goods-from-create",
-  templateUrl:"../baseComponent/base.from.create.component.new.html",
-  styleUrls:["../baseComponent/base.from.create.component.css"],
+  templateUrl:"./../../app/baseComponent/base.from.create.component.new.html",
+  styleUrls:["./../../app/baseComponent/base.from.create.component.css"],
   providers:[BaseCustomerKeysPipe,BaseValidateService,BaseDataService]
 })
 export class GoodsFormComponent extends BaseFormCreateComponentNew implements OnInit{

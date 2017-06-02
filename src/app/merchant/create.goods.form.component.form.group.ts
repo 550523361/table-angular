@@ -8,8 +8,8 @@ import {BaseFormCreateComponentNewFormGroup} from "../baseComponent/base.from.cr
 
 @Component({
   selector:"create-goods-form",
-  templateUrl:"../baseComponent/base.from.create.component.new.form.group.html",
-  styleUrls:["../baseComponent/base.from.create.component.css"],
+  templateUrl:"./../../app/baseComponent/base.from.create.component.new.form.group.html",
+  styleUrls:["./../../app/baseComponent/base.from.create.component.css"],
   providers:[BaseCustomerKeysPipe,BaseValidateService,BaseDataService]
 })
 export class CreateGoodsFormComponentFormGroup extends BaseFormCreateComponentNewFormGroup implements OnInit{

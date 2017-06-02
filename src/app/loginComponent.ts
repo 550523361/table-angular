@@ -7,7 +7,7 @@ import {UserModel} from "./model/user.model";
 declare var $:any;
 @Component({
   selector:"login",
-  templateUrl:"login/login.html"
+  templateUrl:"./../app/login/login.html"
 })
 export class LoginComponent{
   email:string="admin";

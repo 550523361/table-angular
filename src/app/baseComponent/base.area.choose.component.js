@@ -774,8 +774,8 @@ export var BaseAreaChooseComponent = (function (_super) {
     BaseAreaChooseComponent = __decorate([
         Component({
             selector: "base-area-choose",
-            templateUrl: "base.area.choose.component.html",
-            styleUrls: ["base.from.create.component.css", "base.area.choose.component.css"],
+            templateUrl: "../../app/baseComponent/base.area.choose.component.html",
+            styleUrls: ["../../app/baseComponent/base.from.create.component.css", "../../app/baseComponent/base.area.choose.component.css"],
             providers: [BaseDataService, BaseValidateService]
         }), 
         __metadata('design:paramtypes', [FormBuilder, BaseDataService, BaseValidateService])

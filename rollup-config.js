@@ -1,11 +1,12 @@
 import rollup      from 'rollup'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs    from 'rollup-plugin-commonjs';
-import uglify      from 'rollup-plugin-uglify'
+import uglify      from 'rollup-plugin-uglify';
+import html        from 'rollup-plugin-html';
 
 export default {
     entry: 'src/main.js',
-    dest: 'src/build.js', // output a single application bundle
+    dest: 'src/dist/build.js', // output a single application bundle
     sourceMap: false,
     format: 'iife',
     onwarn: function(warning) {
@@ -22,6 +23,17 @@ export default {
         commonjs({
             include: 'node_modules/rxjs/**',
         }),
-        uglify()
+        uglify(),
+        html(
+            {
+                include: '**/*.html',
+                htmlMinifierOptions: {
+                    collapseWhitespace: true,
+                    collapseBooleanAttributes: true,
+                    conservativeCollapse: true,
+                    minifyJS: true
+                }
+            }
+        )
     ]
 }

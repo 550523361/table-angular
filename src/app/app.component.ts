@@ -4,9 +4,9 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: './../app/app.component.html',
   providers:[UserLoginService],
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./../app/app.component.css']
 })
 export class AppComponent{
   title = 'app works!';

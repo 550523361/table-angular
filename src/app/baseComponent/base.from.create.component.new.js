@@ -122,7 +122,6 @@ export var BaseFormCreateComponentNew = (function () {
     };
     BaseFormCreateComponentNew = __decorate([
         Component({
-            selector: "BaseFormCreateComponentNew",
             template: "<span></span>"
         }), 
         __metadata('design:paramtypes', [FormBuilder, BaseDataService])

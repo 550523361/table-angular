@@ -10,8 +10,8 @@ import {BaseDateChooseDirective} from "../directive/base.date.choose";
 
 @Component({
   selector:"create-goods-form",
-  templateUrl:"../baseComponent/base.from.create.component.new.html",
-  styleUrls:["../baseComponent/base.from.create.component.css"],
+  templateUrl:"./../../app/baseComponent/base.from.create.component.new.html",
+  styleUrls:["./../../app/baseComponent/base.from.create.component.css"],
   providers:[BaseCustomerKeysPipe,BaseValidateService,BaseDataService,BaseDateChooseDirective]
 })
 export class CreateMerchantFormComponent extends BaseFormCreateComponentNew implements OnInit{
